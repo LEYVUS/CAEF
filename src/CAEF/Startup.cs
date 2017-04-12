@@ -16,6 +16,7 @@ namespace CAEF
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -27,10 +28,13 @@ namespace CAEF
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.Run(async (context) =>
+            app.UseStaticFiles();
+            app.UseMvc(config =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                config.MapRoute(
+                    name: "Default",
+                    template: "{controller}/{action}/{id?}",
+                    defaults: new { controller = "App", action = "Inicio" });
             });
         }
     }

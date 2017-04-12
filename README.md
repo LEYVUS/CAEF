@@ -18,3 +18,8 @@ Con las siguientes extensiones:
 - TypeScript
 
 ## Por hacer
+- [ ] SQL schemas
+- [ ] EF7 Database First Migration
+- [ ] Autenticación
+- [ ] Operaciones CRUD
+- [ ] Servicios
