@@ -8,6 +8,7 @@ El sistema fue dessarrollado en Visual Studio 2015, utilizando tecnologías tale
 3. Entity Framework Core
 4. Bootstrap
 5. AngularJS
+6. iTextSharp
 
 Con las siguientes extensiones:
 - Web Essentials
