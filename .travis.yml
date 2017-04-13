@@ -1,0 +1,6 @@
+language: csharp
+solution: CAEF.sln
+
+matrix:
+  include:
+    - dotnet: 1.0.1
