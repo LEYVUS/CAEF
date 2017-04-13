@@ -1,7 +1,17 @@
 # CAEF
 <p align="justify">Sistema de Control de Actas de Evaluación Final desarrollado por alumnos de Ingeniería en Computación en la Universidad Autónoma de Baja California</p>
 
+## Table of content
+
+- [Construido Con](#construido-con)
+    - [Tecnologías](#tecnologías)
+    - [Extensiones y Herramientas](#extensiones-y-herramientas)
+- [Por Hacer](#por-hacer)
+- [Licencia](#licencia)
+- [Enlaces](#enlaces)
+
 ## Construido con
+### Tecnologías
 <p align="justify">El sistema fue dessarrollado en Visual Studio 2015, utilizando tecnologías tales como:</p>
 
 1. [**ASP.NET Core**](https://www.asp.net/core): <div align="justify">Framework para el desarrollo de aplicaciones web con funcionalidades transversales como infraestructura, cacheado, _logging_, autenticación, configuración, globalización...</div>
@@ -10,7 +20,7 @@
 4. [**Bootstrap**](http://getbootstrap.com/): <div align="justify">Framework basado en HTML, CSS y JS para el desarrollo de sitios web adaptables.</div>
 5. [**AngularJS**](https://angularjs.org/): <div align="justify">Framework JavaScript de desarrollo de aplicaciones web en el lado cliente que utiliza el patrón MVC principalmente.</div>
 6. [**iTextSharp**](https://www.nuget.org/packages/iTextSharp/): <div align="justify">Librería que permite la generación y mantenimiento de documentos en formato Portable Document Format (PDF) con .NET.</div>
-
+### Extensiones y herramientas
 Con las siguientes extensiones:
 - [**Web Essentials**](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.WebEssentials20135): <div align="justify">Agrega muchas características útiles a Visual Studio para el desarrollo web.</div>
 - [**Web Compiler**](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.WebCompiler): <div align="justify">Permite compilar archivos LESS, Scss, Stylus, JSX y CoffeeScript directamente desde Visual Studio.</div>
@@ -26,3 +36,12 @@ Con las siguientes extensiones:
 - [ ] Operaciones CRUD
 - [ ] Autenticación
 - [ ] Servicios
+
+## Licencia
+No disponible por el momento.
+
+## Enlaces
+* [Sitio oficial](https://www.facebook.com/LeyvusSoftwareDevelopment/)
+* Documentation (En progreso)
+* [Issues](https://github.com/RamonLM/CAEF/issues)
+* [Código fuente](https://github.com/RamonLM/CAEF)
