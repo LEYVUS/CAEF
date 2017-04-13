@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CAEF.Models.Contexts;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,16 @@ namespace CAEF.Controllers
 {
     public class AppController : Controller
     {
+        private UsuarioUABCContext _context;
+
+        public AppController(UsuarioUABCContext context)
+        {
+            _context = context;
+        }
         public IActionResult Inicio()
         {
-            return View();
+            var data = _context.UsuariosUABC.ToList();
+            return View(data);
         }
     }
 }

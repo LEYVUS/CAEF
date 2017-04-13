@@ -61,6 +61,10 @@ h2 {
     color: #6d6d6d;
     font-size: 15px;
     text-align: center;
+    /* --- */
+    padding: 8px 4px;
+    bottom: 0;
+    width: 100%;
 }
 #footer p {
     margin-bottom: 0;
