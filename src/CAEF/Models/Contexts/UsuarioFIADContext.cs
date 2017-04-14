@@ -1,11 +1,6 @@
-﻿using CAEF.Models.FIAD;
+﻿using CAEF.Models.Entities.FIAD;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CAEF.Models.Contexts
 {

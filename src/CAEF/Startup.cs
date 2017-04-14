@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using CAEF.Models.Contexts;
 using Microsoft.Extensions.Configuration;
+using CAEF.Models.Seed;
 
 namespace CAEF
 {
     public class Startup
     {
         private IConfigurationRoot _config;
+        private IHostingEnvironment _env;
 
         public Startup(IHostingEnvironment env)
         {
+            _env = env;
             var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
+                .SetBasePath(_env.ContentRootPath)
                 .AddJsonFile("config.json");
 
             _config = builder.Build();
@@ -31,15 +29,21 @@ namespace CAEF
             services.AddSingleton(_config);
             services.AddDbContext<UsuarioUABCContext>();
             services.AddDbContext<UsuarioFIADContext>();
+            services.AddTransient<SemillaUABC>();
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure
+            (
+            ILoggerFactory loggerFactory,
+            IApplicationBuilder app,
+            SemillaUABC semillaUABC
+            )
         {
             loggerFactory.AddConsole();
 
-            if (env.IsDevelopment())
+            if (_env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -51,6 +55,8 @@ namespace CAEF
                     template: "{controller}/{action}/{id?}",
                     defaults: new { controller = "App", action = "Inicio" });
             });
+
+            semillaUABC.GeneraDatosSemilla().Wait();
         }
     }
 }

@@ -1,13 +1,7 @@
-﻿using CAEF.Models.CAEF;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CAEF.Models
+namespace CAEF.Models.Entities.CAEF
 {
     public class Usuario
     {
