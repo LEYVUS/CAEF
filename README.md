@@ -31,10 +31,10 @@ Con las siguientes extensiones:
 ## Por hacer
 - [X] ~~SQL schemas~~
 - [X] ~~EF7 Database First Migration~~
-- [ ] Controladores
-- [ ] Vistas
-- [ ] Operaciones CRUD
-- [ ] Autenticación
+- [X] Controladores
+- [X] Vistas
+- [ ] Operaciones CRUD (half done)
+- [X] Autenticación
 - [ ] Servicios
 
 ## Licencia
