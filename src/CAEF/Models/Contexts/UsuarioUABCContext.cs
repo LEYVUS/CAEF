@@ -1,10 +1,11 @@
 ﻿using CAEF.Models.Entities.UABC;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace CAEF.Models.Contexts
 {
-    public class UsuarioUABCContext : DbContext
+    public class UsuarioUABCContext : IdentityDbContext<UsuarioUABC>
     {
         private IConfigurationRoot _config;
 

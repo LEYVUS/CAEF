@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using CAEF.Models.Contexts;
 
-namespace CAEF.MigracionUABC
+namespace CAEF.Migrations.MigracionFIAD
 {
-    [DbContext(typeof(UsuarioUABCContext))]
-    [Migration("20170413024448_InicialUABC")]
-    partial class InicialUABC
+    [DbContext(typeof(UsuarioFIADContext))]
+    [Migration("20170414204413_InicialFIAD")]
+    partial class InicialFIAD
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,10 +17,10 @@ namespace CAEF.MigracionUABC
                 .HasAnnotation("ProductVersion", "1.1.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CAEF.Models.UABC.UsuarioUABC", b =>
+            modelBuilder.Entity("CAEF.Models.Entities.FIAD.UsuarioFIAD", b =>
                 {
-                    b.Property<int>("Numero_Empleado")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .HasColumnName("Numero_Empleado");
 
                     b.Property<string>("ApellidoM");
 
@@ -30,11 +30,9 @@ namespace CAEF.MigracionUABC
 
                     b.Property<string>("Nombre");
 
-                    b.Property<string>("Password");
+                    b.HasKey("Id");
 
-                    b.HasKey("Numero_Empleado");
-
-                    b.ToTable("UsuariosUABC");
+                    b.ToTable("UsuariosFIAD");
                 });
         }
     }

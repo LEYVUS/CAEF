@@ -1,23 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using CAEF.Models.Contexts;
 
-namespace CAEF.MigracionUABC
+namespace CAEF.Migrations.MigracionUABC
 {
     [DbContext(typeof(UsuarioUABCContext))]
-    partial class UsuarioUABCContextModelSnapshot : ModelSnapshot
+    [Migration("20170414204342_InicialUABC")]
+    partial class InicialUABC
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CAEF.Models.UABC.UsuarioUABC", b =>
+            modelBuilder.Entity("CAEF.Models.Entities.UABC.UsuarioUABC", b =>
                 {
-                    b.Property<int>("Numero_Empleado")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .HasColumnName("Numero_Empleado");
 
                     b.Property<string>("ApellidoM");
 
@@ -29,7 +32,7 @@ namespace CAEF.MigracionUABC
 
                     b.Property<string>("Password");
 
-                    b.HasKey("Numero_Empleado");
+                    b.HasKey("Id");
 
                     b.ToTable("UsuariosUABC");
                 });

@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CAEF.MigracionFIAD
+namespace CAEF.Migrations.MigracionFIAD
 {
     public partial class InicialFIAD : Migration
     {
@@ -11,8 +12,7 @@ namespace CAEF.MigracionFIAD
                 name: "UsuariosFIAD",
                 columns: table => new
                 {
-                    Numero_Empleado = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Numero_Empleado = table.Column<int>(nullable: false),
                     ApellidoM = table.Column<string>(nullable: true),
                     ApellidoP = table.Column<string>(nullable: true),
                     Correo = table.Column<string>(nullable: true),

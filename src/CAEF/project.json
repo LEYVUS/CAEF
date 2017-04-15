@@ -16,10 +16,12 @@
     "Microsoft.Extensions.Configuration.Json": "1.1.1",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.1.1",
     "Microsoft.EntityFrameworkCore.Design": "1.1.1",
+    "AutoMapper": "6.0.2",
     "Microsoft.EntityFrameworkCore.Tools.DotNet": {
       "version": "1.1.0-preview4-final",
       "type": "build"
-    }
+    },
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.1"
   },
 
   "tools": {

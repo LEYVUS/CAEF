@@ -4,23 +4,30 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CAEF.Models.Entities.CAEF
 {
-    public class Solicitud
+    public class SolicitudDocente
     {
         public int Id { get; set; }
         [Required]
         [ForeignKey("Materia")]
-        public int Id_Materia { get; set; }
+        public int IdMateria { get; set; }
+        [Required]
         public string Periodo { get; set; }
+        [Required]
         [ForeignKey("Carrera")]
-        public int Id_Carrera { get; set; }
+        public int IdCarrera { get; set; }
+        [Required]
         [ForeignKey("TipoExamen")]
-        public int Id_TipoExamen { get; set; }
+        public int IdTipoExamen { get; set; }
+        [Required]
         [ForeignKey("Usuario")]
-        public int Id_Empleado { get; set; }
+        public int IdEmpleado { get; set; }
+        [Required]
         public DateTime FechaCreacion { get; set; }
+        [Required]
         public string Motivo { get; set; }
+        [Required]
         [ForeignKey("Estado")]
-        public int Id_Estado { get; set; }
+        public int IdEstado { get; set; }
         public virtual Materia Materia { get; set; }
         public virtual Carrera Carrera { get; set; }
         public virtual TipoExamen TipoExamen { get; set; }

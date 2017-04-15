@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CAEF.MigracionUABC
+namespace CAEF.Migrations.MigracionUABC
 {
     public partial class InicialUABC : Migration
     {
@@ -11,8 +12,7 @@ namespace CAEF.MigracionUABC
                 name: "UsuariosUABC",
                 columns: table => new
                 {
-                    Numero_Empleado = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Numero_Empleado = table.Column<int>(nullable: false),
                     ApellidoM = table.Column<string>(nullable: true),
                     ApellidoP = table.Column<string>(nullable: true),
                     Correo = table.Column<string>(nullable: true),

@@ -1,23 +1,28 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CAEF.Models.Entities.CAEF
 {
-    public class Usuario
+    public class Alumno
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("Numero_Empleado")]
+        [Column("Matricula_Alumno")]
         public int Id { get; set; }
+        [Required]
         public string Nombre { get; set; }
+        [Required]
         public string ApellidoP { get; set; }
+        [Required]
         public string ApellidoM { get; set; }
         [Required]
-        [DataType(DataType.EmailAddress)]
-        public string Correo { get; set; }
+        public int Grupo { get; set; }
         [Required]
-        [ForeignKey("Rol")]
-        public int RolId { get; set; }
-        public virtual Rol Rol { get; set; }
+        public int Promedio { get; set; }
     }
 }

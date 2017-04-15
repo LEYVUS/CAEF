@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using CAEF.Models.Contexts;
 
-namespace CAEF.MigracionFIAD
+namespace CAEF.Migrations.MigracionFIAD
 {
     [DbContext(typeof(UsuarioFIADContext))]
     partial class UsuarioFIADContextModelSnapshot : ModelSnapshot
@@ -14,10 +16,10 @@ namespace CAEF.MigracionFIAD
                 .HasAnnotation("ProductVersion", "1.1.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CAEF.Models.FIAD.UsuarioFIAD", b =>
+            modelBuilder.Entity("CAEF.Models.Entities.FIAD.UsuarioFIAD", b =>
                 {
-                    b.Property<int>("Numero_Empleado")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .HasColumnName("Numero_Empleado");
 
                     b.Property<string>("ApellidoM");
 
@@ -27,7 +29,7 @@ namespace CAEF.MigracionFIAD
 
                     b.Property<string>("Nombre");
 
-                    b.HasKey("Numero_Empleado");
+                    b.HasKey("Id");
 
                     b.ToTable("UsuariosFIAD");
                 });
