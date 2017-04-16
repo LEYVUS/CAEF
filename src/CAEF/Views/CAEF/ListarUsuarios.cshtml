@@ -4,12 +4,13 @@
     ViewBag.PageName = "Usuarios";
     Layout = "_Layout";
 }
-<div class="tab-content col-md-10">
+<div class="tab-content col-md-10" ng-app="app-usuarios">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Usuarios del sistema</h3>
         </div>
-        <div class="panel-body">
+        <div ng-controller="usuariosController" class="panel-body">
+            <div class="text-danger" ng-show="error">{{error}}</div>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -24,75 +25,17 @@
                 </thead>
 
                 <tbody>
-                        @foreach (var usuario in Model)
-                        {
-                            <tr>
-                                <td>@usuario.Id</td>
-                                <td>@usuario.Nombre</td>
-                                <td>@usuario.ApellidoP @usuario.ApellidoM</td>
-                                <td>@usuario.Correo</td>
-                                <td>@usuario.Rol.Nombre</td>
-                                <td><a href="#editar" class="btn btn-primary btn-xs" data-toggle="modal"><span class="glyphicon glyphicon-edit"></span></a></td>
-                                <td><a href="#eliminar" class="btn btn-danger btn-xs" data-toggle="modal"><span class="glyphicon glyphicon-trash"></span></a></td>
-                            </tr>
-                        }
+                    <tr ng-repeat="u in usuarios">
+                        <td>{{u.id}}</td>
+                        <td>{{u.nombre}}</td>
+                        <td>{{u.apellidoP}} {{u.apellidoM}}</td>
+                        <td>{{u.correo}}</td>
+                        <td>{{u.rol.nombre}}</td>
+                        <td><a class="btn btn-primary btn-xs" data-toggle="modal" ng-click="editarUsuario(u, roles)"><span class="glyphicon glyphicon-edit"></span></a></td>
+                        <td><a class="btn btn-danger btn-xs" data-toggle="modal" ng-click="borrarUsuario(u)"><span class="glyphicon glyphicon-trash"></span></a></td>
+                    </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
-</div>
-
-<!--ventana de dialogo eliminar-->
-<div class="modal fade" id="eliminar">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!--Header de la ventana-->
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 class="modal-title">Eliminar</h3>
-            </div>
-            <div class="modal-body">
-                <!--Contenido de la ventana-->
-                <h4>¿Esta seguro de eliminar el usuario?</h4>
-            </div>
-            <div class="modal-footer">
-                <!--Footer de la ventana-->
-                <input type="submit" value="Aceptar" class="btn btn-primary">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--ventana de dialogo editar-->
-<div class="modal fade" id="editar">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!--Header de la ventana-->
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 class="modal-title">Editar datos </h3>
-            </div>
-            <div class="modal-body">
-                <!--Contenido de la ventana-->
-                <label>N&uacute;mero de empleado:</label>
-                <input class="form-control input-sm" placeholder="Id Empleado">
-                <br />
-                <label>Correo:</label>
-                <input class="form-control input-sm" type="email" placeholder="Correo Institucional">
-                <br />
-                <label>Rol:</label>
-                <select class="form-control input-sm">
-                    <option>Director</option>
-                    <option>SubDirector</option>
-                    <option>Secreatria</option>
-                </select>
-            </div>
-            <div class="modal-footer">
-                <!--Footer de la ventana-->
-                <button type="button" class="btn btn-primary">Guardar</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-            </div>
         </div>
     </div>
 </div>

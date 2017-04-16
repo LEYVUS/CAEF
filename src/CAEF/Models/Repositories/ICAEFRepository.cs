@@ -9,6 +9,8 @@ namespace CAEF.Models.Repositories
         IEnumerable<Usuario> ObtenerUsuarios();
         IEnumerable<Rol> ObtenerRoles();
         void AgregarUsuario(Usuario usuario);
+        void EditarUsuario(Usuario usuario);
+        void BorrarUsuario(Usuario usuario);
         bool UsuarioExiste(Usuario usuario);
         bool UsuarioDuplicado(Usuario usuario);
         Task<bool> GuardarCambios();

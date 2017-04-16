@@ -32,6 +32,47 @@ namespace CAEF.Controllers.API
         }
 
         [Authorize]
+        [HttpGet("API/Usuarios")]
+        public IActionResult VerUsuarios()
+        {
+            var usuarios = _repositorioCAEF.ObtenerUsuarios();
+            var usuariosDTO = Mapper.Map<IEnumerable<UsuarioDTO>>(usuarios);
+            return Ok(usuariosDTO);
+        }
+
+        [Authorize]
+        [HttpGet("API/Roles")]
+        public IActionResult VerRoles()
+        {
+            var roles = _repositorioCAEF.ObtenerRoles();
+            return Ok(roles);
+        }
+
+        [Authorize]
+        [HttpPost("API/Editar")]
+        public async Task<IActionResult> EditarUsuarios([FromBody] UsuarioDTO usuario)
+        {
+            _repositorioCAEF.EditarUsuario(Mapper.Map<Usuario>(usuario));
+            if(await _repositorioCAEF.GuardarCambios())
+            {
+                return Ok();
+            }
+            return BadRequest("Error al editar el usuario");
+        }
+
+        [Authorize]
+        [HttpPost("API/Borrar")]
+        public async Task<IActionResult> BorrarUsuarios([FromBody] UsuarioDTO usuario)
+        {
+            _repositorioCAEF.BorrarUsuario(Mapper.Map<Usuario>(usuario));
+            if (await _repositorioCAEF.GuardarCambios())
+            {
+                return Redirect("/Usuarios");
+            }
+            return BadRequest("Error al borrar el usuario");
+        }
+
+        [Authorize]
         [HttpGet("AgregarUsuario")]
         public IActionResult AgregarUsuario()
         {

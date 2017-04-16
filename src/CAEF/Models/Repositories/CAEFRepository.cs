@@ -27,7 +27,7 @@ namespace CAEF.Models.Repositories
             // nombres de la BD de UABC para poder mostrarlo en la lista
             // con toda la información correcta.
             var usuarioUABC = _contextoUABC.UsuariosUABC
-                .Where(u => u.Email == usuario.Correo)
+                .Where(u => u.Matricula == usuario.Id)
                 .FirstOrDefault();
 
             usuario.Nombre = usuarioUABC.Nombre;
@@ -51,7 +51,7 @@ namespace CAEF.Models.Repositories
         public bool UsuarioExiste(Usuario usuario)
         {
             var resultado = _contextoUABC.UsuariosUABC
-                .Where(u => u.Email == usuario.Correo)
+                .Where(u => u.Matricula == usuario.Id)
                 .FirstOrDefault();
 
             return resultado == null ? false: true;
@@ -69,6 +69,28 @@ namespace CAEF.Models.Repositories
                 .FirstOrDefault();
 
             return resultado == null ? false : true;
+        }
+
+        public void EditarUsuario(Usuario usuario)
+        {
+            var resultado = _contextoCAEF.Usuarios
+                .Where(u => u.Id == usuario.Id)
+                .FirstOrDefault();
+
+            if(resultado != null)
+            {
+                resultado.RolId = usuario.RolId;
+                _contextoCAEF.Usuarios.Update(resultado);
+            }
+        }
+
+        public void BorrarUsuario(Usuario usuario)
+        {
+            var resultado = _contextoCAEF.Usuarios
+                .Where(u => u.Id == usuario.Id)
+                .FirstOrDefault();
+
+            if(resultado != null) _contextoCAEF.Usuarios.Remove(resultado);
         }
     }
 }

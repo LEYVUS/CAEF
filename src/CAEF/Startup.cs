@@ -50,7 +50,7 @@ namespace CAEF
                 config.Password.RequireUppercase = false;
                 config.Password.RequireDigit = false;
                 config.Cookies.ApplicationCookie.LoginPath = "/Login";
-                config.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+                //config.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromMinutes(5);
             })
             .AddEntityFrameworkStores<UsuarioUABCContext>();
 
