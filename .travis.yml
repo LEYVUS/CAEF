@@ -1,4 +1,7 @@
 language: csharp
-solution: CAEF.sln
+dist: trusty
+sudo: required
 mono: none
 dotnet: 1.0.1
+script:
+  - src/CAEF/build.sh --quiet verify
