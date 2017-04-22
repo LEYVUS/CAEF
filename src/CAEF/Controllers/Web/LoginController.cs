@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 namespace CAEF.Controllers.Web
 {
     [Route("/")]
-    public class AppController : Controller
+    public class LoginController : Controller
     {
         private IUABCRepository _repositorioUABC;
         private SignInManager<UsuarioUABC> _signIn;
 
-        public AppController(IUABCRepository repositorioUABC, SignInManager<UsuarioUABC> signInManager)
+        public LoginController(IUABCRepository repositorioUABC, SignInManager<UsuarioUABC> signInManager)
         {
             _repositorioUABC = repositorioUABC;
             _signIn = signInManager;

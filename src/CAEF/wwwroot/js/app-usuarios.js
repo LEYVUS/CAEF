@@ -7,13 +7,11 @@
 
 var app = angular.module("app-usuarios", ['angularModalService']);
 
-app.controller("usuariosController", function ($scope, $http, ModalService) {
+app.controller("usuariosController", function ($scope, $location, $window, $http, ModalService) {
     // Lista de usuarios en el sistema
     $scope.usuarios = {};
     // Mensaje de error
     $scope.error = "";
-    // Opcion del usuario (sí/no)
-    $scope.opcion = null;
     // Roles de usuario
     $scope.roles = {}
 
@@ -41,21 +39,43 @@ app.controller("usuariosController", function ($scope, $http, ModalService) {
             templateUrl: "views/editarUsuario.html",
             controller: "EditarController",
             inputs: {
-                rol: usuario.rol,
+                usuario: usuario,
                 roles: listaRoles
             }
         }).then(function (modal) {
             modal.element.modal();
             modal.close.then(function (result) {
-                if (usuario.rol.nombre == result.nombre) {
+                if (usuario.rol.nombre != result.nombre) {
                     console.log(result);
-                } else {
                     usuario.rolId = result.id;
                     $http.post("/API/Editar", usuario)
                     .then(function (response) {
-                        console.log(response);
+                        ModalService.showModal({
+                            templateUrl: "views/mensajeGenerico.html",
+                            controller: "MensajeController",
+                            inputs: {
+                                mensaje: "El usuario fue modificado exitosamente"
+                            }
+                        }).then(function (modal) {
+                            modal.element.modal();
+                            modal.close.then(function () {
+                                $window.location = "/Usuarios";
+                            });
+                        });
+                        
                     }, function (error) {
-                        $scope.error = "Error al editar usuario: " + error;
+                        ModalService.showModal({
+                            templateUrl: "views/mensajeGenerico.html",
+                            controller: "MensajeController",
+                            inputs: {
+                                mensaje: "Ocurrió un error al modificar usuario"
+                            }
+                        }).then(function (modal) {
+                            modal.element.modal();
+                            modal.close.then(function () {
+                                $window.location = "/Usuarios";
+                            });
+                        });
                     });
                 }
             });
@@ -96,10 +116,11 @@ app.controller('BorrarController', function ($scope, close) {
     };
 });
 
-app.controller('EditarController', function ($scope, $element, rol, roles, close) {
-    console.log("Rol actual: " + rol.nombre)
+app.controller('EditarController', function ($scope, $element, usuario, roles, close) {
+    console.log(usuario);
 
-    $scope.rolActual = rol;
+    $scope.usuario = usuario;
+    $scope.rolActual = usuario.rol;
     $scope.listaRoles = roles;
     $scope.rolSeleccionado = $scope.rolActual;
 
@@ -111,5 +132,13 @@ app.controller('EditarController', function ($scope, $element, rol, roles, close
     $scope.cancel = function () {
         console.log("Escogiste rol: " + $scope.rolSeleccionado.nombre);
         close($scope.rolActual, 500);
+    };
+});
+
+app.controller('MensajeController', function ($scope, mensaje, close) {
+    $scope.mensaje = mensaje;
+
+    $scope.close = function () {
+        close(true, 500);
     };
 });

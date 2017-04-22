@@ -67,7 +67,7 @@ namespace CAEF.Controllers.API
             _repositorioCAEF.BorrarUsuario(Mapper.Map<Usuario>(usuario));
             if (await _repositorioCAEF.GuardarCambios())
             {
-                return Redirect("/Usuarios");
+                return Ok();
             }
             return BadRequest("Error al borrar el usuario");
         }
@@ -93,7 +93,6 @@ namespace CAEF.Controllers.API
 
             if (!usuarioExiste) ModelState.AddModelError("", "El usuario no es miembro de UABC");
             if (usuarioDuplicado) ModelState.AddModelError("", "El usuario ya existe en el sistema");
-
             if (ModelState.IsValid)
             {
                 _repositorioCAEF.AgregarUsuario(Mapper.Map<Usuario>(usuario));
