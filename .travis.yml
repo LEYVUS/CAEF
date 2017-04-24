@@ -1,9 +1,0 @@
-language: csharp
-dist: trusty
-sudo: required
-mono: none
-dotnet: 1.0.0-preview2-003131
-before_script:
- - chmod +x src/CAEF/build.sh
-script:
-  - src/CAEF/build.sh --quiet verify
