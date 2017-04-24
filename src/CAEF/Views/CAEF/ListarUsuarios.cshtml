@@ -4,12 +4,12 @@
     ViewBag.PageName = "Usuarios";
     Layout = "_Layout";
 }
-<div class="tab-content col-md-10" ng-app="app-usuarios">
+<div class="tab-content col-md-10" ng-app="app-caef">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Usuarios del sistema</h3>
         </div>
-        <div ng-controller="usuariosController" class="panel-body">
+        <div ng-controller="UsuariosController" class="panel-body">
             <div class="text-danger" ng-show="error">{{error}}</div>
             <table class="table table-bordered">
                 <thead>
@@ -31,8 +31,8 @@
                         <td>{{u.apellidoP}} {{u.apellidoM}}</td>
                         <td>{{u.correo}}</td>
                         <td>{{u.rol.nombre}}</td>
-                        <td><a class="btn btn-primary btn-xs" data-toggle="modal" ng-click="editarUsuario(u, roles)"><span class="glyphicon glyphicon-edit"></span></a></td>
-                        <td><a class="btn btn-danger btn-xs" data-toggle="modal" ng-click="borrarUsuario(u)"><span class="glyphicon glyphicon-trash"></span></a></td>
+                        <td><a ng-hide="u.id === usuarioAutenticado.id" class="btn btn-primary btn-xs" data-toggle="modal" ng-click="editarUsuario(u, roles)"><span class="glyphicon glyphicon-edit"></span></a></td>
+                        <td><a ng-hide="u.id === usuarioAutenticado.id" class="btn btn-danger btn-xs" data-toggle="modal" ng-click="borrarUsuario(u)"><span class="glyphicon glyphicon-trash"></span></a></td>
                     </tr>
                 </tbody>
             </table>

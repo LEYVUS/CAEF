@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="~/css/estilos.css">
     <title>@ViewBag.Title</title>
 </head>
-<body>
+<body ng-app="app-caef">
     <header>
         <div class="page-header">
             <div class="row">
@@ -24,10 +24,10 @@
     <div class="row" id="menu">
         <div class="container">
             <h3 id="h3Menu">Menu</h3>
-            <ul class="nav nav-pills nav-stacked col-md-2">
-                <li><label><span class="glyphicon glyphicon-user"></span> @User.Identity.Name</label></li>
-                <li class="@(ViewBag.PageName == "Inicio" ? "active" : null)"><a href="/"><span class="glyphicon glyphicon-home"></span>  Inicio</a></li>
-                <li class="@(ViewBag.pagename == "Usuarios" || ViewBag.pagename == "Agregar Usuario" ? "dropdown active" : "dropdown")">
+            <ul ng-controller="MenuController" class="nav nav-pills nav-stacked col-md-2">
+                <li><label><span class="glyphicon glyphicon-user"></span> {{usuarioAutenticado.nombre}}</label></li>
+                <li ng-class="{ active: isActive('/')}" ><a href="/"><span class="glyphicon glyphicon-home"></span>  Inicio</a></li>
+                <li ng-show="usuarioAutenticado.rolId == 1" ng-class="{ active: isActive('/AgregarUsuario') || isActive('/Usuarios')}" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <span class="glyphicon glyphicon-user"></span> Usuarios<span class="caret"></span>
                     </a>
@@ -80,7 +80,8 @@
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/lib/angularjs/angular.min.js"></script>
+    <script src="~/lib/jpkleemans-angular-validate/dist/angular-validate.min.js"></script>
     <script src="~/lib/angular-modal-service/dst/angular-modal-service.min.js"></script>
-    <script src="~/js/app-usuarios.js"></script>
+    <script src="~/js/script.js"></script>
 </body>
 </html>

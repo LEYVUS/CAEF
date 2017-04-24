@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CAEF.Controllers.API
+namespace CAEF.Controllers
 {
     public class UABCController : Controller
     {

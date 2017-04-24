@@ -29,7 +29,6 @@ namespace CAEF.Models.Seed
             {
                 var usuarioA = new UsuarioUABC()
                 {
-                    //Id = "003/38323",
                     Matricula = 338323,
                     UserName = "rlopez1",
                     Nombre = "José Ramón",
@@ -40,7 +39,6 @@ namespace CAEF.Models.Seed
 
                 var usuarioB = new UsuarioUABC()
                 {
-                    //Id = "003/35127",
                     Matricula = 335127,
                     UserName = "samuel.parra",
                     Nombre = "César Samuel",
@@ -51,7 +49,6 @@ namespace CAEF.Models.Seed
 
                 var usuarioC = new UsuarioUABC()
                 {
-                    //Id = "003/31364",
                     Matricula = 331364,
                     UserName = "celso.figueroa",
                     Nombre = "Celso",
@@ -60,16 +57,20 @@ namespace CAEF.Models.Seed
                     Email = "celso.figueroa@uabc.edu.mx"
                 };
 
+                var usuarioD = new UsuarioUABC()
+                {
+                    Matricula = 338833,
+                    UserName = "kevin.zavala",
+                    Nombre = "Kevin Enrique",
+                    ApellidoP = "Zavala",
+                    ApellidoM = "Níz",
+                    Email = "kevin.zavala@uabc.edu.mx"
+                };
+
                 var result = await _userManager.CreateAsync(usuarioA, "password");
                 var result2 = await _userManager.CreateAsync(usuarioB, "password");
                 var result3 = await _userManager.CreateAsync(usuarioC, "password");
-
-                if (!result.Succeeded)
-                {
-                }
-                //_context.UsuariosUABC.Add(usuarioA);
-                //_context.UsuariosUABC.Add(usuarioB);
-                //_context.UsuariosUABC.Add(usuarioC);
+                var result4 = await _userManager.CreateAsync(usuarioD, "password");
 
                 await _context.SaveChangesAsync();
             }

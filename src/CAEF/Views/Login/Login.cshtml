@@ -1,5 +1,4 @@
-﻿@model CAEF.ViewModels.LoginDTO
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/css/estilos.css">
 </head>
-<body>
+<body ng-app="app-caef">
     <header>
         <div class="page-header">
             <div class="row">
@@ -35,21 +34,25 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Iniciar sesi&oacute;n:</h3>
                     </div>
-                    <div class="panel-body">
-                        <form method="post" role="form" novalidate>
-                            <div asp-validation-summary="ModelOnly"></div>
+                    <div class="panel-body" ng-controller="LoginController">
+                        <form name="form" role="form" novalidate>
                             <fieldset>
                                 <div class="form-group">
                                     <label>Correo:</label>
-                                    <input asp-for="Email" class="form-control" placeholder="Correo" name="email" type="email" autofocus>
-                                    <span asp-validation-for="Email"></span>
+                                    <input ng-model="usuario.Email" class="form-control" placeholder="Correo" name="email" type="email" autofocus required>
+                                    <div ng-show="form.$submitted || form.email.$touched">
+                                        <span ng-show="form.email.$error.required">Escribe un correo.</span>
+                                        <span ng-show="form.email.$error.email">Escribe un correo válido.</span>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Contraseña:</label>
-                                    <input asp-for="Password" class="form-control" placeholder="Contraseña" name="password" type="password" value="">
-                                    <span asp-validation-for="Password"></span>
+                                    <input ng-model="usuario.Password" class="form-control" placeholder="Contraseña" name="password" type="password" value="" required>
+                                    <div ng-show="form.$submitted || form.password.$touched">
+                                        <span ng-show="form.password.$error.required">Escribe una contraseña.</span>
+                                    </div>
                                 </div>
-                                <input type="submit" value="Ingresar" class="btn btn-success btn-block">
+                                <input type="submit" ng-disabled="form.$invalid" ng-click="login()" value="Ingresar" class="btn btn-success btn-block">
                             </fieldset>
                         </form>
                     </div>
@@ -74,5 +77,9 @@
     <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script type="text/javascript" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/angularjs/angular.min.js"></script>
+    <script src="~/lib/jpkleemans-angular-validate/dist/angular-validate.min.js"></script>
+    <script src="~/lib/angular-modal-service/dst/angular-modal-service.min.js"></script>
+    <script src="~/js/script.js"></script>
 </body>
 </html>

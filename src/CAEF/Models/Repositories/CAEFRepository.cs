@@ -27,9 +27,10 @@ namespace CAEF.Models.Repositories
             // nombres de la BD de UABC para poder mostrarlo en la lista
             // con toda la información correcta.
             var usuarioUABC = _contextoUABC.UsuariosUABC
-                .Where(u => u.Matricula == usuario.Id)
+                .Where(u => u.Email == usuario.Correo)
                 .FirstOrDefault();
 
+            usuario.Id = usuarioUABC.Matricula;
             usuario.Nombre = usuarioUABC.Nombre;
             usuario.ApellidoP = usuarioUABC.ApellidoP;
             usuario.ApellidoM = usuarioUABC.ApellidoM;
@@ -48,13 +49,24 @@ namespace CAEF.Models.Repositories
             return (await _contextoCAEF.SaveChangesAsync()) > 0;
         }
 
-        public bool UsuarioExiste(Usuario usuario)
+        public bool UsuarioExiste(string Correo)
         {
-            var resultado = _contextoUABC.UsuariosUABC
-                .Where(u => u.Matricula == usuario.Id)
+            var resultado = _contextoUABC.Users
+                .Where(u => u.Email == Correo)
                 .FirstOrDefault();
 
             return resultado == null ? false: true;
+        }
+
+        public Usuario UsuarioAutenticado(string Username)
+        {
+            var Correo = Username + "@uabc.edu.mx";
+            var Usuario = _contextoCAEF.Usuarios
+                .Include(u => u.Rol)
+                .Where(u => u.Correo == Correo)
+                .FirstOrDefault();
+
+            return Usuario;
         }
 
         public IEnumerable<Rol> ObtenerRoles()
@@ -62,10 +74,10 @@ namespace CAEF.Models.Repositories
             return _contextoCAEF.Roles.ToList();
         }
 
-        public bool UsuarioDuplicado(Usuario usuario)
+        public bool UsuarioDuplicado(string Correo)
         {
             var resultado = _contextoCAEF.Usuarios
-                .Where(u => u.Id == usuario.Id)
+                .Where(u => u.Correo == Correo)
                 .FirstOrDefault();
 
             return resultado == null ? false : true;
@@ -74,7 +86,7 @@ namespace CAEF.Models.Repositories
         public void EditarUsuario(Usuario usuario)
         {
             var resultado = _contextoCAEF.Usuarios
-                .Where(u => u.Id == usuario.Id)
+                .Where(u => u.Correo == usuario.Correo)
                 .FirstOrDefault();
 
             if(resultado != null)
@@ -87,7 +99,7 @@ namespace CAEF.Models.Repositories
         public void BorrarUsuario(Usuario usuario)
         {
             var resultado = _contextoCAEF.Usuarios
-                .Where(u => u.Id == usuario.Id)
+                .Where(u => u.Correo == usuario.Correo)
                 .FirstOrDefault();
 
             if(resultado != null) _contextoCAEF.Usuarios.Remove(resultado);

@@ -21,5 +21,14 @@ namespace CAEF.Models.Repositories
         {
             return _context.UsuariosFIAD.ToList();
         }
+
+        public bool UsuarioExiste(string correo)
+        {
+            var resultado = _context.UsuariosFIAD
+                .Where(u => u.Correo == correo)
+                .FirstOrDefault();
+
+            return resultado == null ? false : true;
+        }
     }
 }

@@ -57,6 +57,7 @@ namespace CAEF
             // Datos semilla
             services.AddTransient<SemillaUABC>();
             services.AddTransient<SemillaCAEF>();
+            services.AddTransient<SemillaFIAD>();
 
             // Repositorios
             services.AddScoped<IUABCRepository, UABCRepository>();
@@ -79,7 +80,8 @@ namespace CAEF
             ILoggerFactory loggerFactory,
             IApplicationBuilder app,
             SemillaUABC semillaUABC,
-            SemillaCAEF semillaCAEF
+            SemillaCAEF semillaCAEF,
+            SemillaFIAD semillaFIAD
             )
         {
             Mapper.Initialize(config =>
@@ -102,11 +104,12 @@ namespace CAEF
                 config.MapRoute(
                     name: "Default",
                     template: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "App", action = "Inicio" });
+                    defaults: new { controller = "Login", action = "Inicio" });
             });
 
             semillaUABC.GeneraDatosSemilla().Wait();
             semillaCAEF.GeneraDatosSemilla().Wait();
+            semillaFIAD.GeneraDatosSemilla().Wait();
         }
     }
 }

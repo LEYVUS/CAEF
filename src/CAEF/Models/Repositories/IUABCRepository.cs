@@ -6,5 +6,6 @@ namespace CAEF.Models.Repositories
     public interface IUABCRepository
     {
         IEnumerable<UsuarioUABC> ObtenerUsuarios();
+        bool UsuarioExiste(string correo);
     }
 }

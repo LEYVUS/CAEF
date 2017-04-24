@@ -11,8 +11,9 @@ namespace CAEF.Models.Repositories
         void AgregarUsuario(Usuario usuario);
         void EditarUsuario(Usuario usuario);
         void BorrarUsuario(Usuario usuario);
-        bool UsuarioExiste(Usuario usuario);
-        bool UsuarioDuplicado(Usuario usuario);
+        bool UsuarioExiste(string Correo);
+        Usuario UsuarioAutenticado(string username);
+        bool UsuarioDuplicado(string Correo);
         Task<bool> GuardarCambios();
     }
 }

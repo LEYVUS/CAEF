@@ -6,5 +6,6 @@ namespace CAEF.Models.Repositories
     public interface IFIADRepository
     {
         IEnumerable<UsuarioFIAD> ObtenerUsuarios();
+        bool UsuarioExiste(string correo);
     }
 }

@@ -2,6 +2,7 @@
 using CAEF.Models.Entities.UABC;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace CAEF.Models.Repositories
 {
@@ -17,6 +18,15 @@ namespace CAEF.Models.Repositories
         public IEnumerable<UsuarioUABC> ObtenerUsuarios()
         {
             return _context.UsuariosUABC.ToList();
+        }
+
+        public bool UsuarioExiste(string correo)
+        {
+            var resultado = _context.Users
+                .Where(u => u.Email == correo)
+                .FirstOrDefault();
+
+            return resultado == null ? false : true;
         }
     }
 }
