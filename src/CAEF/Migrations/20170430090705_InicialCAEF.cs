@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace CAEF.Migrations.MigracionCAEF
+namespace CAEF.Migrations
 {
     public partial class InicialCAEF : Migration
     {
@@ -56,13 +56,13 @@ namespace CAEF.Migrations.MigracionCAEF
                 name: "Materias",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Clave_Materia = table.Column<int>(nullable: false),
+                    Carrera = table.Column<string>(nullable: false),
                     Nombre = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Materias", x => x.Id);
+                    table.PrimaryKey("PK_Materias", x => x.Clave_Materia);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,7 +167,7 @@ namespace CAEF.Migrations.MigracionCAEF
                         name: "FK_SolicitudesDocente_Materias_IdMateria",
                         column: x => x.IdMateria,
                         principalTable: "Materias",
-                        principalColumn: "Id",
+                        principalColumn: "Clave_Materia",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SolicitudesDocente_TiposExamen_IdTipoExamen",

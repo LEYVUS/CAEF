@@ -8,6 +8,10 @@ namespace CAEF.Models.Repositories
     {
         IEnumerable<Usuario> ObtenerUsuarios();
         IEnumerable<Rol> ObtenerRoles();
+        IEnumerable<Carrera> ObtenerCarreras();
+        IEnumerable<Materia> ObtenerMaterias();
+        IEnumerable<SubtipoExamen> ObtenerSubtiposExamen();
+        IEnumerable<TipoExamen> ObtenerTiposExamen();
         void AgregarUsuario(Usuario usuario);
         void EditarUsuario(Usuario usuario);
         void BorrarUsuario(Usuario usuario);

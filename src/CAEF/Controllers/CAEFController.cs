@@ -43,6 +43,22 @@ namespace CAEF.Controllers
         }
 
         [Authorize]
+        [HttpGet("Acta")]
+        public IActionResult SolicitarActaAdmin()
+        {
+            var usuarioActual = _repositorioCAEF.UsuarioAutenticado(User.Identity.Name);
+
+            if (usuarioActual.RolId == 1)
+            {
+                return View();
+            }
+            else
+            {
+                return View("SolicitarActaDocente");
+            }
+        }
+
+        [Authorize]
         [HttpGet("CAEF/Usuarios")]
         public IActionResult VerUsuarios()
         {
@@ -57,6 +73,38 @@ namespace CAEF.Controllers
         {
             var roles = _repositorioCAEF.ObtenerRoles();
             return Ok(roles);
+        }
+
+        [Authorize]
+        [HttpGet("CAEF/Carreras")]
+        public IActionResult VerCarreras()
+        {
+            var carreras = _repositorioCAEF.ObtenerCarreras();
+            return Ok(carreras);
+        }
+
+        [Authorize]
+        [HttpGet("CAEF/Materias")]
+        public IActionResult VerMaterias()
+        {
+            var materias = _repositorioCAEF.ObtenerMaterias();
+            return Ok(materias);
+        }
+
+        [Authorize]
+        [HttpGet("CAEF/Subtipos")]
+        public IActionResult VerSubtipos()
+        {
+            var subtipos = _repositorioCAEF.ObtenerSubtiposExamen();
+            return Ok(subtipos);
+        }
+
+        [Authorize]
+        [HttpGet("CAEF/Tipos")]
+        public IActionResult VerTipos()
+        {
+            var tipos = _repositorioCAEF.ObtenerTiposExamen();
+            return Ok(tipos);
         }
 
         [Authorize]

@@ -104,5 +104,25 @@ namespace CAEF.Models.Repositories
 
             if(resultado != null) _contextoCAEF.Usuarios.Remove(resultado);
         }
+
+        public IEnumerable<Carrera> ObtenerCarreras()
+        {
+            return _contextoCAEF.Carreras.ToList();
+        }
+
+        public IEnumerable<Materia> ObtenerMaterias()
+        {
+            return _contextoCAEF.Materias.ToList();
+        }
+
+        public IEnumerable<SubtipoExamen> ObtenerSubtiposExamen()
+        {
+            return _contextoCAEF.SubtiposExamen.ToList();
+        }
+
+        public IEnumerable<TipoExamen> ObtenerTiposExamen()
+        {
+            return _contextoCAEF.TiposExamen.ToList();
+        }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using CAEF.Models.Contexts;
 
-namespace CAEF.Migrations.MigracionCAEF
+namespace CAEF.Migrations
 {
     [DbContext(typeof(CAEFContext))]
     partial class CAEFContextModelSnapshot : ModelSnapshot
@@ -70,7 +70,10 @@ namespace CAEF.Migrations.MigracionCAEF
             modelBuilder.Entity("CAEF.Models.Entities.CAEF.Materia", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .HasColumnName("Clave_Materia");
+
+                    b.Property<string>("Carrera")
+                        .IsRequired();
 
                     b.Property<string>("Nombre")
                         .IsRequired();

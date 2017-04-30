@@ -1,5 +1,6 @@
 ﻿using CAEF.Models.Entities.CAEF;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,8 @@ namespace CAEF.Models.Contexts
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(_config["ConexionesBD:ConexionCAEF"]);
+            optionsBuilder
+                .UseSqlServer(_config["ConexionesBD:ConexionCAEF"]);
         }
     }
 }

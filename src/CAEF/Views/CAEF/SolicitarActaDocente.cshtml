@@ -1,0 +1,130 @@
+﻿@{
+    Layout = "_Layout";
+}
+<div class="tab-content col-md-10">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Solicitar acta</h3>
+        </div>
+        <div class="panel-body">
+            <form role="from">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label for="fechaSolicitudDocente">Fecha:</label>
+                            <input type="" class="form-control" id="fechaSolicitudDocente">
+                        </div>
+                        <div class="col-xs-3">
+                            <label for="perodoEscolarDocente">Periodo escolar:</label>
+                            <input type="text" class="form-control" id="perodoEscolarDocente">
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="numeroEmpleadoDocente">Numero de empleado del maestro:</label>
+                            <input type="text" class="form-control" id="numeroEmpleadoDocente">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label for="nombreMateriaDocente">Nombre de la materia:</label>
+                            <input type="text" class="form-control" id="nombreMateriaDocente">
+                        </div>
+                        <div class="col-xs-3">
+                            <label for="claveMateriaDocente">Clave de la materia:</label>
+                            <input type="text" class="form-control" id="claveMateriaDocente">
+                        </div>
+                        <div class="col-xs-3">
+                            <label for="tipoExamenDocente">Tipo de examen:</label>
+                            <select class="form-control" id="tipoExamenDocente">
+                                <option>Ordinario</option>
+                                <option>Extraordinario</option>
+                                <option>Regularizaci&oacute;n</option>
+                                <option>Ordinario intersemestral</option>
+                                <option>Extraordinario intersemestral</option>
+                                <option>Regularizaci&oacute;n intersemestral</option>
+                                <option>Evaluaci&oacute;n permanente</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label for="carreraDocente">Carrera:</label>
+                            <select class="form-control" id="carreraDocente">
+                                <option>Ingenieria civil</option>
+                                <option>Ingenieria electronica</option>
+                                <option>Ingenieria en computaci&oacute;n</option>
+                                <option>Ingenieria industrial</option>
+                                <option>Bioingenieria</option>
+                                <option>Nanotecnolocia</option>
+                                <option>Arquitectura</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-3">
+                            <label for="claveCarreraDocente">Clave de la carrera:</label>
+                            <input type="text" class="form-control" id="claveCarreraDocente">
+                        </div>
+                        <div class="col-xs-3">
+                            <label for="grupoDocente">Grupo:</label>
+                            <input type="text" class="form-control" id="grupoDocente">
+                        </div>
+                    </div>
+                </div>
+                <!--inicio de la tabla para agregar alumnos-->
+                <div class="row">
+                    <div class="col-xs-10">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Datos del alumno:</div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <th>Matricula:</th>
+                                    <th>Nombre(s):</th>
+                                    <th>Apellido paterno:</th>
+                                    <th>Apellido materno:</th>
+                                    <th>Calificaci&oacute;n:</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="text" class="form-control"></td>
+                                            <td><input type="text" class="form-control"></td>
+                                            <td><input type="text" class="form-control"></td>
+                                            <td><input type="text" class="form-control"></td>
+                                            <td><input type="text" class="form-control"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--fin de la tabla para agregar alumnos-->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Agregar nuevo alumno</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <label for="motivoDocente">Motivo por el cual se hace la solicitud:</label>
+                            <textarea class="form-control" rows="4" id="motivoDocente"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8">
+
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary">Enviar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div><!-- tab content -->
