@@ -13,6 +13,10 @@ namespace CAEF.Models.Repositories
         IEnumerable<SubtipoExamen> ObtenerSubtiposExamen();
         IEnumerable<TipoExamen> ObtenerTiposExamen();
         void AgregarUsuario(Usuario usuario);
+        int AgregarActaDocente(SolicitudDocente acta);
+        void AgregarActaAdmin(SolicitudAdmin acta);
+        void AgregarSolicitudAlumno(IEnumerable<SolicitudAlumno> solicitudes);
+        int CuentaSolicitudes();
         void EditarUsuario(Usuario usuario);
         void BorrarUsuario(Usuario usuario);
         bool UsuarioExiste(string Correo);

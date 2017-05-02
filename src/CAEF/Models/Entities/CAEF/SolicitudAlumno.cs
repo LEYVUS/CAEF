@@ -10,7 +10,9 @@ namespace CAEF.Models.Entities.CAEF
 {
     public class SolicitudAlumno
     {
-        [Key, ForeignKey("SolicitudDocente")]
+        public int Id { get; set; }
+        [Required]
+        [ForeignKey("SolicitudDocente")]
         public int IdSolicitud { get; set; }
         [Required]
         [ForeignKey("Alumno")]

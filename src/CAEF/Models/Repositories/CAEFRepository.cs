@@ -124,5 +124,35 @@ namespace CAEF.Models.Repositories
         {
             return _contextoCAEF.TiposExamen.ToList();
         }
+
+        public int AgregarActaDocente(SolicitudDocente acta)
+        {
+            _contextoCAEF.SolicitudesDocente.Add(acta);
+            _contextoCAEF.SaveChanges();
+            return acta.Id;
+        }
+
+        public void AgregarActaAdmin(SolicitudAdmin acta)
+        {
+            _contextoCAEF.SolicitudesAdministrativo.Add(acta);
+        }
+
+        public void AgregarSolicitudAlumno(IEnumerable<SolicitudAlumno> solicitudes)
+        {
+            var NumeroSolicitudes = CuentaSolicitudes();
+            foreach(SolicitudAlumno solicitud in solicitudes)
+            {
+                if(solicitud.Alumno.Id != 0)
+                {
+                    solicitud.IdAlumno = solicitud.Alumno.Id;
+                    _contextoCAEF.SolicitudesAlumno.Add(solicitud);
+                }
+            }
+        }
+
+        public int CuentaSolicitudes()
+        {
+            return _contextoCAEF.SolicitudesDocente.Count();
+        }
     }
 }

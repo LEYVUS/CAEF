@@ -283,6 +283,32 @@ namespace CAEF.Models.Seed
                 await _context.SaveChangesAsync();
             }
 
+            if (!_context.Estados.Any())
+            {
+                var Pendiente = new Estado()
+                {
+                    FechaModificacion = DateTime.Now,
+                    Nombre = "Pendiente"
+                };
+
+                var Aceptado = new Estado()
+                {
+                    FechaModificacion = DateTime.Now,
+                    Nombre = "Aceptado"
+                };
+
+                var Rechazado = new Estado()
+                {
+                    FechaModificacion = DateTime.Now,
+                    Nombre = "Rechazado"
+                };
+
+                _context.Estados.Add(Pendiente);
+                _context.Estados.Add(Aceptado);
+                _context.Estados.Add(Rechazado);
+                await _context.SaveChangesAsync();
+            }
+
             if (!_context.Usuarios.Any())
             {
                 var usuarioA = new Usuario()

@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <label for="fechaSolicitud">Fecha:</label>
-                            <input type="date" value="{{fecha | date: 'yyyy-MM-dd'}}" ng-model="acta.Estado.FechaModificacion" class="form-control" id="fechaSolicitud" disabled>
+                            <input type="date" value="{{fecha | date: 'yyyy-MM-dd'}}" class="form-control" id="fechaSolicitud" disabled>
                         </div>
                         <div class="col-xs-3">
                             <label for="perodoEscolar">Periodo escolar:</label>
@@ -40,14 +40,10 @@
                         </div>
                         <div class="col-xs-3">
                             <label for="tipoExamen">Tipo de examen:</label>
-                            <select class="form-control" id="tipoExamen">
-                                <option>Ordinario</option>
-                                <option>Extraordinario</option>
-                                <option>Regularizaci&oacute;n</option>
-                                <option>Ordinario intersemestral</option>
-                                <option>Extraordinario intersemestral</option>
-                                <option>Regularizaci&oacute;n intersemestral</option>
-                                <option>Evaluaci&oacute;n permanente</option>
+                            <select ng-model="acta.TipoExamen" class="form-control" id="tipoExamen">
+                                <option ng-repeat="tipo in tipos" value="{{tipo}}">
+                                    {{tipo.nombre}}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -56,10 +52,10 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <label for="subtipoExamen">Subtipo de examen:</label>
-                            <select class="form-control" id="subtipoExamen">
-                                <option>Complementaria</option>
-                                <option>Equivalencia</option>
-                                <option>Carreci&oacute;n</option>
+                            <select ng-model="acta.SubTipoExamen" class="form-control" id="tipoExamen">
+                                <option ng-repeat="subtipo in subtipos" value="{{subtipo}}">
+                                    {{subtipo.nombre}}
+                                </option>
                             </select>
                         </div>
                         <div class="col-xs-3">
@@ -76,7 +72,7 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <label for="carreraDocente">Carrera:</label>
-                            <select ng-model="acta.Carrera" id="carreraDocente" class="form-control input-sm">
+                            <select ng-model="acta.Carrera" ng-change="calculaClaveCarrera()" id="carreraDocente" class="form-control input-sm">
                                 <option ng-repeat="carrera in carreras" value="{{carrera}}">
                                     {{carrera.nombre}}
                                 </option>
@@ -84,7 +80,7 @@
                         </div>
                         <div class="col-xs-3">
                             <label for="claveCarreraDocente">Clave de la carrera:</label>
-                            <input type="text" class="form-control" id="claveCarreraDocente">
+                            <input ng-model="claveCarrera" type="text" class="form-control" id="claveCarreraDocente" disabled>
                         </div>
                         <div class="col-xs-3">
                             <label for="grupoDocente">Grupo:</label>
@@ -96,19 +92,19 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <label for="nombreDocente">Nombre del docente</label>
-                            <input type="text" class="form-control" id="nombreDocente">
+                            <input ng-model="acta.Usuario.nombre" type="text" class="form-control" id="nombreDocente" disabled>
                         </div>
                         <div class="col-xs-2">
                             <label for="apellidoPaterno">Apellido paterno:</label>
-                            <input type="text" class="form-control" id="apellidoPaterno">
+                            <input ng-model="acta.Usuario.apellidoP" type="text" class="form-control" id="apellidoPaterno" disabled>
                         </div>
                         <div class="col-xs-2">
                             <label for="apellidoMaterno">Apellido materno:</label>
-                            <input type="text" class="form-control" id="apellidoMaterno">
+                            <input ng-model="acta.Usuario.apellidoM" type="text" class="form-control" id="apellidoMaterno" disabled>
                         </div>
                         <div class="col-xs-3">
                             <label for="numeroEmpleadoDocente">Numero de empleado:</label>
-                            <input type="text" class="form-control" id="numeroEmpleadoDocente">
+                            <input ng-model="acta.Usuario.id" type="text" class="form-control" id="numeroEmpleadoDocente" disabled>
                         </div>
                     </div>
                 </div>

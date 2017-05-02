@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using CAEF.Models.Contexts;
 
-namespace CAEF.Migrations
+namespace CAEF.Migrations.MigracionCAEF
 {
     [DbContext(typeof(CAEFContext))]
-    [Migration("20170430090705_InicialCAEF")]
+    [Migration("20170501215926_InicialCAEF")]
     partial class InicialCAEF
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -142,13 +142,18 @@ namespace CAEF.Migrations
 
             modelBuilder.Entity("CAEF.Models.Entities.CAEF.SolicitudAlumno", b =>
                 {
-                    b.Property<int>("IdSolicitud");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("IdAlumno");
 
-                    b.HasKey("IdSolicitud");
+                    b.Property<int>("IdSolicitud");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("IdAlumno");
+
+                    b.HasIndex("IdSolicitud");
 
                     b.ToTable("SolicitudesAlumno");
                 });

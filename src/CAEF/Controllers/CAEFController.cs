@@ -169,5 +169,38 @@ namespace CAEF.Controllers
                 return BadRequest("Ocurrió un error al agregar usuario.");
             }
         }
+
+        [Authorize]
+        [HttpPost("CAEF/AgregarActaDocente")]
+        public async Task<IActionResult> AgregarActaDocente([FromBody] ActaDocenteDTO acta)
+        {
+            var id = _repositorioCAEF.AgregarActaDocente(Mapper.Map<SolicitudDocente>(acta));
+
+            if (id != 0)
+            {
+                await _repositorioCAEF.GuardarCambios();
+                return Ok(id);
+            }
+            else
+            {
+                return BadRequest("Ocurrió un error al agregar solicitud.");
+            }
+        }
+
+        [Authorize]
+        [HttpPost("CAEF/AgregarSolicitudAlumno")]
+        public async Task<IActionResult> AgregarSolicitudAlumno([FromBody] IEnumerable<SolicitudAlumnoDTO> solicitud)
+        {
+            _repositorioCAEF.AgregarSolicitudAlumno(Mapper.Map<IEnumerable<SolicitudAlumno>>(solicitud));
+
+            if (await _repositorioCAEF.GuardarCambios())
+            {
+                return Ok("Se agregó la solicitud correctamente.");
+            }
+            else
+            {
+                return BadRequest("Ocurrió un error al agregar solicitud.");
+            }
+        }
     }
 }

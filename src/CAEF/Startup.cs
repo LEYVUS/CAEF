@@ -87,6 +87,9 @@ namespace CAEF
             Mapper.Initialize(config =>
             {
                 config.CreateMap<UsuarioDTO, Usuario>().ReverseMap();
+                config.CreateMap<ActaDocenteDTO, SolicitudDocente>().ReverseMap();
+                config.CreateMap<AlumnoDTO, Alumno>().ReverseMap();
+                config.CreateMap<SolicitudAlumnoDTO, SolicitudAlumno>().ReverseMap();
             });
 
             loggerFactory.AddConsole();

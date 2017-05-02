@@ -223,29 +223,47 @@
         $scope.obtenerUsuarioAutenticado();
     });
 
-    app.controller("ActasController", function ($scope, $http, $location, $filter, ModalService) {
-        console.log("Holi");
+    app.controller("ActasController", function ($scope, $http, $location, $window, $filter, ModalService) {
         // Usuario actualmente autenticado
         $scope.usuarioAutenticado = {}
         // Acta que se va a grabar
-        $scope.acta = {}
+        $scope.acta = {
+            Periodo: new Date().getMonth() < 5 ? new Date().getFullYear() + '-1' : new Date().getFullYear() + '-2'
+        }
         // Carreras de la facultad
         $scope.carreras = []
         // Materias de la facultad
         $scope.materias = []
-        // Clave de la materia actual
-        $scope.claveMateria = "";
         // Subtipos de examen
         $scope.subtipos = []
         // Tipos de examen
         $scope.tipos = []
         // Fecha actual
         $scope.fecha = new Date();
+        // Solicitudes de cada alumno
+        $scope.solicitudesAlumno = [{
+            Alumno: {
+                Grupo: ""
+            }
+        }]
+        // Grupo de la solicitud
+        $scope.grupo = ""
+
+        $scope.agregarColumna = function () {
+            var alumnoNuevo = {
+                Alumno: {
+                    Grupo: ""
+                }
+            }
+            $scope.solicitudesAlumno.push(alumnoNuevo);
+        }
 
         $scope.obtenerUsuarioAutenticado = function () {
             $http.get("/CAEF/UsuarioActual")
             .then(function (response) {
                 $scope.usuarioAutenticado = response.data;
+                //$scope.acta.Usuario = $scope.usuarioAutenticado;
+                $scope.acta.IdEmpleado = $scope.usuarioAutenticado.id;
             });
         }
 
@@ -268,7 +286,7 @@
         }
 
         $scope.obtenerSubtipos = function () {
-            $http.get("/CAEF/Roles")
+            $http.get("/CAEF/Subtipos")
             .then(function (response) {
                 $scope.subtipos = response.data;
             }, function (error) {
@@ -286,22 +304,97 @@
         }
 
         $scope.calculaClaveMateria = function () {
-            $scope.claveMateria = $scope.acta.Materia.substring(6, $scope.acta.Materia.indexOf(","));
+            if (!$scope.acta.Materia) {
+                $scope.acta.IdMateria = "";
+            } else {
+                $scope.acta.IdMateria = JSON.parse($scope.acta.Materia).id;
+            }
+
+        }
+
+        $scope.calculaClaveCarrera = function () {
+
+            $scope.acta.IdCarrera = JSON.parse($scope.acta.Carrera).id;
         }
 
         $scope.filtraMaterias = function (materia) {
             if (!$scope.acta.Carrera) return false;
 
-            
-
-            if (materia.carrera === $scope.acta.Carrera.substring(18, $scope.acta.Carrera.length - 2))
+            if (materia.carrera === JSON.parse($scope.acta.Carrera).nombre)
                 return true
             else
                 return false;
         }
 
         $scope.grabar = function () {
-            console.log($scope.acta.Materia.substring(6, $scope.acta.Materia.indexOf(",")));
+            $scope.acta.IdEstado = 1;
+            $scope.acta.FechaCreacion = new Date();
+
+            angular.forEach($scope.solicitudesAlumno, function (value, key) {
+                $scope.solicitudesAlumno[key].Alumno.Grupo = $scope.grupo;
+            });
+
+            console.log($scope.solicitudesAlumno);
+            //console.log($scope.usuarioAutenticado);
+            //console.log($scope.acta);
+
+            $http.post("/CAEF/AgregarActaDocente", $scope.acta)
+            .then(function (response) {
+                console.log("Success");
+                console.log(response);
+
+                angular.forEach($scope.solicitudesAlumno, function (value, key) {
+                    $scope.solicitudesAlumno[key].IdSolicitud = response.data;
+                });
+
+                $http.post("/CAEF/AgregarSolicitudAlumno", $scope.solicitudesAlumno)
+            .then(function (response) {
+                console.log("Success");
+                console.log(response);
+                ModalService.showModal({
+                    templateUrl: "views/mensajeGenerico.html",
+                    controller: "MensajeController",
+                    inputs: {
+                        mensaje: response.data
+                    }
+                }).then(function (modal) {
+                    modal.element.modal();
+                    modal.close.then(function () {
+                        $window.location = "/Acta";
+                    });
+                });
+            }, function (error) {
+                console.log(error);
+                ModalService.showModal({
+                    templateUrl: "views/mensajeGenerico.html",
+                    controller: "MensajeController",
+                    inputs: {
+                        mensaje: error.data
+                    }
+                }).then(function (modal) {
+                    modal.element.modal();
+                    modal.close.then(function () {
+                        //$window.location = "/AgregarUsuario";
+                    });
+                });
+            });
+
+            }, function (error) {
+                console.log(error);
+                ModalService.showModal({
+                    templateUrl: "views/mensajeGenerico.html",
+                    controller: "MensajeController",
+                    inputs: {
+                        mensaje: error.data
+                    }
+                }).then(function (modal) {
+                    modal.element.modal();
+                    modal.close.then(function () {
+                        //$window.location = "/AgregarUsuario";
+                    });
+                });
+            });
+
         }
 
         $scope.obtenerUsuarioAutenticado();

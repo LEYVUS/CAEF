@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace CAEF.Migrations
+namespace CAEF.Migrations.MigracionCAEF
 {
     public partial class InicialCAEF : Migration
     {
@@ -216,12 +216,14 @@ namespace CAEF.Migrations
                 name: "SolicitudesAlumno",
                 columns: table => new
                 {
-                    IdSolicitud = table.Column<int>(nullable: false),
-                    IdAlumno = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IdAlumno = table.Column<int>(nullable: false),
+                    IdSolicitud = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SolicitudesAlumno", x => x.IdSolicitud);
+                    table.PrimaryKey("PK_SolicitudesAlumno", x => x.Id);
                     table.ForeignKey(
                         name: "FK_SolicitudesAlumno_Alumnos_IdAlumno",
                         column: x => x.IdAlumno,
@@ -245,6 +247,11 @@ namespace CAEF.Migrations
                 name: "IX_SolicitudesAlumno_IdAlumno",
                 table: "SolicitudesAlumno",
                 column: "IdAlumno");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SolicitudesAlumno_IdSolicitud",
+                table: "SolicitudesAlumno",
+                column: "IdSolicitud");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SolicitudesDocente_EmpleadoId",
