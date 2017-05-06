@@ -1,4 +1,4 @@
-﻿var app = angular.module("app-caef", ['angularModalService']);
+﻿var app = angular.module("caef", ['angularModalService']);
 
 (function (app) {
     "use strict";
