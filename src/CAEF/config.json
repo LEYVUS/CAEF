@@ -1,7 +1,0 @@
-{
-  "ConexionesBD": {
-    "ConexionUsuariosUABC": "Data Source=DESKTOP-N7RSCBJ\\SQLEXPRESS;Database=UsuariosUABC;MultipleActiveResultSets=true;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
-    "ConexionUsuariosFIAD": "Data Source=DESKTOP-N7RSCBJ\\SQLEXPRESS;Database=UsuariosFIAD;MultipleActiveResultSets=true;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
-    "ConexionCAEF": "Data Source=DESKTOP-N7RSCBJ\\SQLEXPRESS;Database=dbCAEF;MultipleActiveResultSets=true;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
-  }
-}
