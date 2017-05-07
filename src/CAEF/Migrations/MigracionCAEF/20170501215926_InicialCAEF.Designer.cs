@@ -7,7 +7,7 @@ using CAEF.Models.Contexts;
 
 namespace CAEF.Migrations.MigracionCAEF
 {
-    [DbContext(typeof(CAEFContext))]
+    [DbContext(typeof(EntidadesCAEF))]
     [Migration("20170501215926_InicialCAEF")]
     partial class InicialCAEF
     {

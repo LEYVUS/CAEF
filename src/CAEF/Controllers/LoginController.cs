@@ -1,5 +1,7 @@
-﻿using CAEF.Models.Entities.UABC;
+﻿using CAEF.Models.DTO;
+using CAEF.Models.Entities.UABC;
 using CAEF.Models.Repositories;
+using CAEF.Servicios;
 using CAEF.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,22 +14,11 @@ namespace CAEF.Controllers
     [Route("/")]
     public class LoginController : Controller
     {
-        private SignInManager<UsuarioUABC> _signIn;
-        private IFIADRepository _repositorioFIAD;
-        private IUABCRepository _repositorioUABC;
-        private ICAEFRepository _repositorioCAEF;
 
-        public LoginController(
-            SignInManager<UsuarioUABC> signInManager,
-            IFIADRepository repositorioFIAD,
-            IUABCRepository repositorioUABC,
-            ICAEFRepository repositorioCAEF)
-        {
-            _repositorioFIAD = repositorioFIAD;
-            _repositorioUABC = repositorioUABC;
-            _repositorioCAEF = repositorioCAEF;
-            _signIn = signInManager;
-        }
+
+        private LoginServicio loginServicio = new LoginServicio();
+        private UsuarioServicio usuarioServicio = new UsuarioServicio();
+        
 
         [HttpGet("Login")]
         public IActionResult Login()
@@ -42,52 +33,21 @@ namespace CAEF.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
-            var username = login.Email.Split('@')[0];
 
-            if (_repositorioUABC.UsuarioExiste(login.Email))
+            MensajeDTO mensaje = await loginServicio.Logear(login);
+
+            if (mensaje.estado)
             {
-                var signIn = await _signIn.PasswordSignInAsync(username,
-                                                     login.Password,
-                                                     true, false);
-                if (signIn.Succeeded)
-                {
-                    if (_repositorioFIAD.UsuarioExiste(login.Email))
-                    {
-                        if (_repositorioCAEF.UsuarioDuplicado(login.Email))
-                        {
-                            return Ok();
-                        }
-                        else
-                        {
-                            await _signIn.SignOutAsync();
-                            return BadRequest("El usuario no se encuentra registrado en el sistema.");
-                        }
-                    }
-                    else
-                    {
-                        await _signIn.SignOutAsync();
-                        return BadRequest("El usuario no pertenece a FIAD.");
-                    }
-                }
-                else
-                {
-                    await _signIn.SignOutAsync();
-                    return BadRequest("Ocurrió un error al iniciar sesión. Favor de verificar los datos.");
-                }
+                return Ok();
             }
-            else
-            {
-                return BadRequest("El usuario no pertenece a UABC.");
-            }
+            return BadRequest(mensaje.Respuesta["Mensaje"]);
+          
         }
 
         [HttpGet("Logout")]
-        public async Task<IActionResult> Logout()
+        public IActionResult Logout()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                await _signIn.SignOutAsync();
-            }
+            loginServicio.LogOut(User.Identity.IsAuthenticated);
             return Redirect("/");
         }
 
@@ -102,9 +62,7 @@ namespace CAEF.Controllers
         [HttpGet("CAEF/UsuarioActual")]
         public IActionResult GetCurrentUser()
         {
-            var usuarioActual = _repositorioCAEF.UsuarioAutenticado(User.Identity.Name);
-
-            return Ok(usuarioActual);
+            return Ok(usuarioServicio.BuscarPorCorreo(User.Identity.Name));
         }
     }
 }

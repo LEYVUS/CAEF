@@ -10,7 +10,7 @@ namespace CAEF.Migrations.MigracionCAEF
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Alumnos",
+                name: "Alumno",
                 columns: table => new
                 {
                     Matricula_Alumno = table.Column<int>(nullable: false),
@@ -22,11 +22,11 @@ namespace CAEF.Migrations.MigracionCAEF
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Alumnos", x => x.Matricula_Alumno);
+                    table.PrimaryKey("PK_Alumno", x => x.Matricula_Alumno);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Carreras",
+                name: "Carrera",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -35,11 +35,11 @@ namespace CAEF.Migrations.MigracionCAEF
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Carreras", x => x.Id);
+                    table.PrimaryKey("PK_Carrera", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Estados",
+                name: "Estado",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -49,11 +49,11 @@ namespace CAEF.Migrations.MigracionCAEF
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Estados", x => x.Id);
+                    table.PrimaryKey("PK_Estado", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Materias",
+                name: "Materia",
                 columns: table => new
                 {
                     Clave_Materia = table.Column<int>(nullable: false),
@@ -62,11 +62,11 @@ namespace CAEF.Migrations.MigracionCAEF
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Materias", x => x.Clave_Materia);
+                    table.PrimaryKey("PK_Materia", x => x.Clave_Materia);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Roles",
+                name: "Rol",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -75,11 +75,11 @@ namespace CAEF.Migrations.MigracionCAEF
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Roles", x => x.Id);
+                    table.PrimaryKey("PK_Rol", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SubtiposExamen",
+                name: "SubtipoExamen",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -88,11 +88,11 @@ namespace CAEF.Migrations.MigracionCAEF
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubtiposExamen", x => x.Id);
+                    table.PrimaryKey("PK_SubtipoExamen", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TiposExamen",
+                name: "TipoExamen",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -101,11 +101,11 @@ namespace CAEF.Migrations.MigracionCAEF
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TiposExamen", x => x.Id);
+                    table.PrimaryKey("PK_TipoExamen", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Usuarios",
+                name: "Usuario",
                 columns: table => new
                 {
                     Numero_Empleado = table.Column<int>(nullable: false),
@@ -117,17 +117,17 @@ namespace CAEF.Migrations.MigracionCAEF
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuarios", x => x.Numero_Empleado);
+                    table.PrimaryKey("PK_Usuario", x => x.Numero_Empleado);
                     table.ForeignKey(
-                        name: "FK_Usuarios_Roles_RolId",
+                        name: "FK_Usuario_Rol_RolId",
                         column: x => x.RolId,
-                        principalTable: "Roles",
+                        principalTable: "Rol",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SolicitudesDocente",
+                name: "SolicitudDocente",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -144,41 +144,41 @@ namespace CAEF.Migrations.MigracionCAEF
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SolicitudesDocente", x => x.Id);
+                    table.PrimaryKey("PK_SolicitudDocente", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SolicitudesDocente_Usuarios_EmpleadoId",
+                        name: "FK_SolicitudDocente_Usuarios_EmpleadoId",
                         column: x => x.EmpleadoId,
-                        principalTable: "Usuarios",
+                        principalTable: "Usuario",
                         principalColumn: "Numero_Empleado",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SolicitudesDocente_Carreras_IdCarrera",
+                        name: "FK_SolicitudDocente_Carrera_IdCarrera",
                         column: x => x.IdCarrera,
-                        principalTable: "Carreras",
+                        principalTable: "Carrera",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SolicitudesDocente_Estados_IdEstado",
+                        name: "FK_SolicitudDocente_Estado_IdEstado",
                         column: x => x.IdEstado,
-                        principalTable: "Estados",
+                        principalTable: "Estado",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SolicitudesDocente_Materias_IdMateria",
+                        name: "FK_SolicitudDocente_Materia_IdMateria",
                         column: x => x.IdMateria,
-                        principalTable: "Materias",
+                        principalTable: "Materia",
                         principalColumn: "Clave_Materia",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SolicitudesDocente_TiposExamen_IdTipoExamen",
+                        name: "FK_SolicitudDocente_TipoExamen_IdTipoExamen",
                         column: x => x.IdTipoExamen,
-                        principalTable: "TiposExamen",
+                        principalTable: "TipoExamen",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SolicitudesAdministrativo",
+                name: "SolicitudAdministrativo",
                 columns: table => new
                 {
                     IdSolicitud = table.Column<int>(nullable: false),
@@ -197,23 +197,23 @@ namespace CAEF.Migrations.MigracionCAEF
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SolicitudesAdministrativo", x => x.IdSolicitud);
+                    table.PrimaryKey("PK_SolicitudAdministrativo", x => x.IdSolicitud);
                     table.ForeignKey(
-                        name: "FK_SolicitudesAdministrativo_SolicitudesDocente_IdSolicitud",
+                        name: "FK_SolicitudAdministrativo_SolicitudDocente_IdSolicitud",
                         column: x => x.IdSolicitud,
-                        principalTable: "SolicitudesDocente",
+                        principalTable: "SolicitudDocente",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SolicitudesAdministrativo_SubtiposExamen_SubTipoExamenId",
+                        name: "FK_SolicitudAdministrativo_SubtipoExamen_SubTipoExamenId",
                         column: x => x.SubTipoExamenId,
-                        principalTable: "SubtiposExamen",
+                        principalTable: "SubtipoExamen",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SolicitudesAlumno",
+                name: "SolicitudAlumno",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -223,101 +223,101 @@ namespace CAEF.Migrations.MigracionCAEF
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SolicitudesAlumno", x => x.Id);
+                    table.PrimaryKey("PK_SolicitudAlumno", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SolicitudesAlumno_Alumnos_IdAlumno",
+                        name: "FK_SolicitudAlumno_Alumno_IdAlumno",
                         column: x => x.IdAlumno,
-                        principalTable: "Alumnos",
+                        principalTable: "Alumno",
                         principalColumn: "Matricula_Alumno",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SolicitudesAlumno_SolicitudesDocente_IdSolicitud",
+                        name: "FK_SolicitudAlumno_SolicitudDocente_IdSolicitud",
                         column: x => x.IdSolicitud,
-                        principalTable: "SolicitudesDocente",
+                        principalTable: "SolicitudDocente",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_SolicitudesAdministrativo_SubTipoExamenId",
-                table: "SolicitudesAdministrativo",
+                name: "IX_SolicitudAdministrativo_SubTipoExamenId",
+                table: "SolicitudAdministrativo",
                 column: "SubTipoExamenId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SolicitudesAlumno_IdAlumno",
-                table: "SolicitudesAlumno",
+                name: "IX_SolicitudAlumno_IdAlumno",
+                table: "SolicitudAlumno",
                 column: "IdAlumno");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SolicitudesAlumno_IdSolicitud",
-                table: "SolicitudesAlumno",
+                name: "IX_SolicitudAlumno_IdSolicitud",
+                table: "SolicitudAlumno",
                 column: "IdSolicitud");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SolicitudesDocente_EmpleadoId",
-                table: "SolicitudesDocente",
+                name: "IX_SolicitudDocente_EmpleadoId",
+                table: "SolicitudDocente",
                 column: "EmpleadoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SolicitudesDocente_IdCarrera",
-                table: "SolicitudesDocente",
+                name: "IX_SolicitudDocente_IdCarrera",
+                table: "SolicitudDocente",
                 column: "IdCarrera");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SolicitudesDocente_IdEstado",
-                table: "SolicitudesDocente",
+                name: "IX_SolicitudDocente_IdEstado",
+                table: "SolicitudDocente",
                 column: "IdEstado");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SolicitudesDocente_IdMateria",
-                table: "SolicitudesDocente",
+                name: "IX_SolicitudDocente_IdMateria",
+                table: "SolicitudDocente",
                 column: "IdMateria");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SolicitudesDocente_IdTipoExamen",
-                table: "SolicitudesDocente",
+                name: "IX_SolicitudDocente_IdTipoExamen",
+                table: "SolicitudDocente",
                 column: "IdTipoExamen");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Usuarios_RolId",
-                table: "Usuarios",
+                name: "IX_Usuario_RolId",
+                table: "Usuario",
                 column: "RolId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "SolicitudesAdministrativo");
+                name: "SolicitudAdministrativo");
 
             migrationBuilder.DropTable(
-                name: "SolicitudesAlumno");
+                name: "SolicitudAlumno");
 
             migrationBuilder.DropTable(
-                name: "SubtiposExamen");
+                name: "SubtipoExamen");
 
             migrationBuilder.DropTable(
-                name: "Alumnos");
+                name: "Alumno");
 
             migrationBuilder.DropTable(
-                name: "SolicitudesDocente");
+                name: "SolicitudDocente");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "Usuario");
 
             migrationBuilder.DropTable(
-                name: "Carreras");
+                name: "Carrera");
 
             migrationBuilder.DropTable(
-                name: "Estados");
+                name: "Estado");
 
             migrationBuilder.DropTable(
-                name: "Materias");
+                name: "Materia");
 
             migrationBuilder.DropTable(
-                name: "TiposExamen");
+                name: "TipoExamen");
 
             migrationBuilder.DropTable(
-                name: "Roles");
+                name: "Rol");
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using CAEF.Models.Entities.FIAD;
 
-namespace CAEF.Models.Repositories
+namespace CAEF.Repositorios
 {
-    public interface IFIADRepository
+    public interface IUsuarioFIADRepositorio
     {
         IEnumerable<UsuarioFIAD> ObtenerUsuarios();
-        bool UsuarioExiste(string correo);
+        UsuarioFIAD BuscarPorCorreo(string correo);
     }
 }

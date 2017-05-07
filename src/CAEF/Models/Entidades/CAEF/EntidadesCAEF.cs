@@ -10,11 +10,15 @@ using System.Threading.Tasks;
 
 namespace CAEF.Models.Contexts
 {
-    public class CAEFContext : DbContext
+    public class EntidadesCAEF : DbContext
     {
         private IConfigurationRoot _config;
 
-        public CAEFContext(IConfigurationRoot config, DbContextOptions<CAEFContext> options) : base(options)
+        public EntidadesCAEF()
+        {
+        }
+
+        public EntidadesCAEF(IConfigurationRoot config, DbContextOptions<EntidadesCAEF> options) : base(options)
         {
             _config = config;
         }
@@ -24,7 +28,7 @@ namespace CAEF.Models.Contexts
         public DbSet<Estado> Estados { get; set; }
         public DbSet<Materia> Materias { get; set; }
         public DbSet<Rol> Roles { get; set; }
-        public DbSet<SolicitudAdmin> SolicitudesAdministrativo { get; set; }
+        public DbSet<SolicitudAdministrador> SolicitudesAdministrativo { get; set; }
         public DbSet<SolicitudAlumno> SolicitudesAlumno { get; set; }
         public DbSet<SolicitudDocente> SolicitudesDocente { get; set; }
         public DbSet<SubtipoExamen> SubtiposExamen { get; set; }

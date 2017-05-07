@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CAEF.Models.Entities.CAEF
 {
-    public class SolicitudAdmin
+    public class SolicitudAdministrador
     {
         [Key, ForeignKey("SolicitudDocente")]
         public int IdSolicitud { get; set; }

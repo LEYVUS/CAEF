@@ -13,6 +13,7 @@ using CAEF.Models.Entities.UABC;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using Microsoft.AspNetCore.Mvc;
+using CAEF.Models.DTO;
 
 namespace CAEF
 {
@@ -40,7 +41,7 @@ namespace CAEF
             // Contexts de base de datos
             services.AddDbContext<UsuarioUABCContext>();
             services.AddDbContext<UsuarioFIADContext>();
-            services.AddDbContext<CAEFContext>();
+            services.AddDbContext<EntidadesCAEF>();
 
             // Soporte a ASP.NET Identity para autenticación
             services.AddIdentity<UsuarioUABC, IdentityRole>(config =>
@@ -54,15 +55,8 @@ namespace CAEF
             })
             .AddEntityFrameworkStores<UsuarioUABCContext>();
 
-            // Datos semilla
-            services.AddTransient<SemillaUABC>();
-            services.AddTransient<SemillaCAEF>();
-            services.AddTransient<SemillaFIAD>();
 
-            // Repositorios
-            services.AddScoped<IUABCRepository, UABCRepository>();
-            services.AddScoped<IFIADRepository, FIADRepository>();
-            services.AddScoped<ICAEFRepository, CAEFRepository>();
+
 
             // MVC
             services.AddMvc(config =>
@@ -76,12 +70,9 @@ namespace CAEF
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure
-            (
-            ILoggerFactory loggerFactory,
-            IApplicationBuilder app,
-            SemillaUABC semillaUABC,
-            SemillaCAEF semillaCAEF,
-            SemillaFIAD semillaFIAD
+                (
+                    ILoggerFactory loggerFactory,
+                    IApplicationBuilder app
             )
         {
             Mapper.Initialize(config =>
@@ -110,9 +101,7 @@ namespace CAEF
                     defaults: new { controller = "Login", action = "Inicio" });
             });
 
-            semillaUABC.GeneraDatosSemilla().Wait();
-            semillaCAEF.GeneraDatosSemilla().Wait();
-            semillaFIAD.GeneraDatosSemilla().Wait();
+
         }
     }
 }

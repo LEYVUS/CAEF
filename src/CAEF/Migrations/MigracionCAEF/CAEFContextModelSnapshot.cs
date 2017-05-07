@@ -7,7 +7,7 @@ using CAEF.Models.Contexts;
 
 namespace CAEF.Migrations.MigracionCAEF
 {
-    [DbContext(typeof(CAEFContext))]
+    [DbContext(typeof(EntidadesCAEF))]
     partial class CAEFContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -96,7 +96,7 @@ namespace CAEF.Migrations.MigracionCAEF
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("CAEF.Models.Entities.CAEF.SolicitudAdmin", b =>
+            modelBuilder.Entity("CAEF.Models.Entities.CAEF.SolicitudAdministrador", b =>
                 {
                     b.Property<int>("IdSolicitud");
 
@@ -246,7 +246,7 @@ namespace CAEF.Migrations.MigracionCAEF
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("CAEF.Models.Entities.CAEF.SolicitudAdmin", b =>
+            modelBuilder.Entity("CAEF.Models.Entities.CAEF.SolicitudAdministrador", b =>
                 {
                     b.HasOne("CAEF.Models.Entities.CAEF.SolicitudDocente", "SolicitudDocente")
                         .WithMany()
