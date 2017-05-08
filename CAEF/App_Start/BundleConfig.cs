@@ -8,24 +8,34 @@ namespace CAEF
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-            //            "~/Scripts/jquery-{version}.js"));
+            bundles.Add(new ScriptBundle("~/Content/jquery").Include(
+                         "~/Content/node_modules/jquery/dist/jquery.min.js"));
 
-            //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-            //            "~/Scripts/jquery.validate*"));
+            bundles.Add(new ScriptBundle("~/Content/Bootstrap/js").Include(
+                        "~/Content/node_modules/bootstrap/dist/js/bootstrap.min.js"));
 
-            //// Use the development version of Modernizr to develop with and learn from. Then, when you're
-            //// ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            //bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-            //            "~/Scripts/modernizr-*"));
+            bundles.Add(new StyleBundle("~/Content/Bootstrap/css").Include(
+                        "~/Content/node_modules/bootstrap/dist/css/bootstrap.css",
+                        "~/Content/css/estilos.css"));
 
-            //bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-            //          "~/Scripts/bootstrap.js",
-            //          "~/Scripts/respond.js"));
+            bundles.Add(new ScriptBundle("~/Content/Angular").Include(
+                        "~/Content/node_modules/angular/angular.min.js",
+                        "~/Content/node_modules/angular-route/angular-route.min.js",
+                         "~/Content/node_modules/angular-crypto/angular-crypto.min.js",
+                        "~/Content/node_modules/angular-modal-service/dst/angular-modal-service.min.js",
+                        "~/Content/node_modules/angular-local-storage/dist/angular-local-storage.min.js"));
 
-            //bundles.Add(new StyleBundle("~/Content/css").Include(
-            //          "~/Content/bootstrap.css",
-            //          "~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/Content/Angular/app").Include(
+                       "~/Content/src/app-controller.js", "~/Content/src/app.js",
+                       "~/Content/src/Directiva/TempleteDirectiva.js"));
+
+            bundles.Add(new ScriptBundle("~/Content/Angular/Inicio").Include(
+                       "~/Content/src/Controller/LoginControlador.js",
+                       "~/Content/src/Controller/TiempoControlador.js"));
+
+            bundles.Add(new ScriptBundle("~/Content/Angular/Usuario").Include(
+                       "~/Content/src/Controller/UsuarioControlador.js",
+                       "~/Content/src/Servicio/ServicioUtileria.js"));
         }
     }
 }

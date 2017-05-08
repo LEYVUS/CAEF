@@ -16,7 +16,7 @@ namespace CAEF.Controllers
         /// </summary>
         /// <param name="usuario"></param>
         /// <returns>Devuelve los datos del usuario</returns>
-        [Route("SS/Login")]
+        [Route("CAEF/Login")]
         [HttpPost]
         public IHttpActionResult Index(UsuarioDTO usuario)
         {

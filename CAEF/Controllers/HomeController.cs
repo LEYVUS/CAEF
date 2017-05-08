@@ -9,7 +9,7 @@ namespace CAEF.Controllers
     public class HomeController : Controller
     {
 
-        public ActionResult Login()
+        public ActionResult Index()
         {
             return View();
         }
