@@ -10,17 +10,17 @@ app.config(function ($routeProvider, localStorageServiceProvider) {
             controller: 'loginCtrl'
         })
 
-        .when('/CAEF/usuario/listar', {
-            templateUrl: '../Content/views/listar.html',
-            controller: 'usuarioCtrl'
+        //.when('/CAEF/usuario/listar', {
+        //    templateUrl: '../Content/views/listar.html',
+        //    controller: 'usuarioCtrl'
 
-        })
-        .when('/CAEF/Inicio', {
-            templateUrl: '../Content/views/inicio.html',
-        })
-         .when('/CAEF/Solicitud', {
-             templateUrl: '../Content/views/agregar.html',
-         })
+        //})
+        //.when('/CAEF/Inicio', {
+        //    templateUrl: '../Content/views/inicio.html',
+        //})
+        // .when('/CAEF/Solicitud', {
+        //     templateUrl: '../Content/views/agregar.html',
+        // })
         .otherwise({
             redirectTo: '/login'
         })
