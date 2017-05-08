@@ -55,7 +55,7 @@ namespace CAEF.Models.Repositories
                 .Where(u => u.Email == Correo)
                 .FirstOrDefault();
 
-            return resultado == null ? false: true;
+            return resultado == null ? false : true;
         }
 
         public Usuario UsuarioAutenticado(string Username)
@@ -89,7 +89,7 @@ namespace CAEF.Models.Repositories
                 .Where(u => u.Correo == usuario.Correo)
                 .FirstOrDefault();
 
-            if(resultado != null)
+            if (resultado != null)
             {
                 resultado.RolId = usuario.RolId;
                 _contextoCAEF.Usuarios.Update(resultado);
@@ -102,7 +102,7 @@ namespace CAEF.Models.Repositories
                 .Where(u => u.Correo == usuario.Correo)
                 .FirstOrDefault();
 
-            if(resultado != null) _contextoCAEF.Usuarios.Remove(resultado);
+            if (resultado != null) _contextoCAEF.Usuarios.Remove(resultado);
         }
 
         public IEnumerable<Carrera> ObtenerCarreras()
@@ -139,20 +139,30 @@ namespace CAEF.Models.Repositories
 
         public void AgregarSolicitudAlumno(IEnumerable<SolicitudAlumno> solicitudes)
         {
-            var NumeroSolicitudes = CuentaSolicitudes();
-            foreach(SolicitudAlumno solicitud in solicitudes)
+            foreach (SolicitudAlumno solicitud in solicitudes)
             {
-                if(solicitud.Alumno.Id != 0)
+                solicitud.IdAlumno = solicitud.Alumno.Id;
+
+                if (AlumnoExiste(solicitud.Alumno.Id))
                 {
-                    solicitud.IdAlumno = solicitud.Alumno.Id;
+                    //_contextoCAEF.Alumnos.Attach(solicitud.Alumno);
                     _contextoCAEF.SolicitudesAlumno.Add(solicitud);
                 }
+                else
+                {
+                    _contextoCAEF.SolicitudesAlumno.Add(solicitud);
+                }
+
             }
         }
 
-        public int CuentaSolicitudes()
+        public bool AlumnoExiste(int Id)
         {
-            return _contextoCAEF.SolicitudesDocente.Count();
+            var resultado = _contextoCAEF.Alumnos
+                .Where(a => a.Id == Id)
+                .FirstOrDefault();
+
+            return resultado == null ? false : true;
         }
     }
 }

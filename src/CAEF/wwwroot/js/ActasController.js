@@ -33,6 +33,13 @@
         $scope.solicitudesAlumno.push(alumnoNuevo);
     }
 
+    $scope.removerColumna = function () {
+        if ($scope.solicitudesAlumno.length > 1) {
+            $scope.solicitudesAlumno.splice(-1, 1);
+        }
+
+    }
+
     $scope.obtenerUsuarioAutenticado = function () {
         $http.get("/CAEF/UsuarioActual")
         .then(function (response) {

@@ -16,10 +16,10 @@ namespace CAEF.Models.Repositories
         int AgregarActaDocente(SolicitudDocente acta);
         void AgregarActaAdmin(SolicitudAdmin acta);
         void AgregarSolicitudAlumno(IEnumerable<SolicitudAlumno> solicitudes);
-        int CuentaSolicitudes();
         void EditarUsuario(Usuario usuario);
         void BorrarUsuario(Usuario usuario);
         bool UsuarioExiste(string Correo);
+        bool AlumnoExiste(int Id);
         Usuario UsuarioAutenticado(string username);
         bool UsuarioDuplicado(string Correo);
         Task<bool> GuardarCambios();

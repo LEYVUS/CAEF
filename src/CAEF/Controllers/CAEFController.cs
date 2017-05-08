@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using CAEF.Models.Contexts;
+using CAEF.Models.DTO;
 using CAEF.Models.Entities.CAEF;
 using CAEF.Models.Repositories;
-using CAEF.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -191,16 +191,18 @@ namespace CAEF.Controllers
         [HttpPost("CAEF/AgregarSolicitudAlumno")]
         public async Task<IActionResult> AgregarSolicitudAlumno([FromBody] IEnumerable<SolicitudAlumnoDTO> solicitud)
         {
-            _repositorioCAEF.AgregarSolicitudAlumno(Mapper.Map<IEnumerable<SolicitudAlumno>>(solicitud));
+            if(solicitud != null)
+            {
+                _repositorioCAEF.AgregarSolicitudAlumno(Mapper.Map<IEnumerable<SolicitudAlumno>>(solicitud));
 
-            if (await _repositorioCAEF.GuardarCambios())
-            {
-                return Ok("Se agregó la solicitud correctamente.");
+                if (await _repositorioCAEF.GuardarCambios())
+                {
+                    return Ok("Se agregó la solicitud correctamente.");
+                }
             }
-            else
-            {
-                return BadRequest("Ocurrió un error al agregar solicitud.");
-            }
+
+            return BadRequest("Ocurrió un error al agregar solicitud.");
+
         }
     }
 }

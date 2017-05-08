@@ -82,4 +82,5 @@ input[type=number] {
 
 .red {
   border: solid 1px red;
+  color: red;
 }

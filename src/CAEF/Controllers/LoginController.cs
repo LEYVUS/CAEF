@@ -1,11 +1,12 @@
 ﻿using CAEF.Models.Entities.UABC;
 using CAEF.Models.Repositories;
-using CAEF.ViewModels;
+using CAEF.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using CAEF.Models.Services;
 
 namespace CAEF.Controllers
 {
@@ -16,17 +17,20 @@ namespace CAEF.Controllers
         private IFIADRepository _repositorioFIAD;
         private IUABCRepository _repositorioUABC;
         private ICAEFRepository _repositorioCAEF;
+        private LoginServices _login;
 
         public LoginController(
             SignInManager<UsuarioUABC> signInManager,
             IFIADRepository repositorioFIAD,
             IUABCRepository repositorioUABC,
-            ICAEFRepository repositorioCAEF)
+            ICAEFRepository repositorioCAEF,
+            LoginServices login)
         {
             _repositorioFIAD = repositorioFIAD;
             _repositorioUABC = repositorioUABC;
             _repositorioCAEF = repositorioCAEF;
             _signIn = signInManager;
+            _login = login;
         }
 
         [HttpGet("Login")]
@@ -42,43 +46,12 @@ namespace CAEF.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
-            var username = login.Email.Split('@')[0];
+            string sesion = await _login.Login(login);
 
-            if (_repositorioUABC.UsuarioExiste(login.Email))
-            {
-                var signIn = await _signIn.PasswordSignInAsync(username,
-                                                     login.Password,
-                                                     true, false);
-                if (signIn.Succeeded)
-                {
-                    if (_repositorioFIAD.UsuarioExiste(login.Email))
-                    {
-                        if (_repositorioCAEF.UsuarioDuplicado(login.Email))
-                        {
-                            return Ok();
-                        }
-                        else
-                        {
-                            await _signIn.SignOutAsync();
-                            return BadRequest("El usuario no se encuentra registrado en el sistema.");
-                        }
-                    }
-                    else
-                    {
-                        await _signIn.SignOutAsync();
-                        return BadRequest("El usuario no pertenece a FIAD.");
-                    }
-                }
-                else
-                {
-                    await _signIn.SignOutAsync();
-                    return BadRequest("Ocurrió un error al iniciar sesión. Favor de verificar los datos.");
-                }
-            }
+            if (sesion != null)
+                return BadRequest(sesion);
             else
-            {
-                return BadRequest("El usuario no pertenece a UABC.");
-            }
+                return Ok();
         }
 
         [HttpGet("Logout")]

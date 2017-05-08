@@ -7,12 +7,13 @@ using Microsoft.Extensions.Configuration;
 using CAEF.Models.Seed;
 using CAEF.Models.Repositories;
 using AutoMapper;
-using CAEF.ViewModels;
+using CAEF.Models.DTO;
 using CAEF.Models.Entities.CAEF;
 using CAEF.Models.Entities.UABC;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using Microsoft.AspNetCore.Mvc;
+using CAEF.Models.Services;
 
 namespace CAEF
 {
@@ -63,6 +64,9 @@ namespace CAEF
             services.AddScoped<IUABCRepository, UABCRepository>();
             services.AddScoped<IFIADRepository, FIADRepository>();
             services.AddScoped<ICAEFRepository, CAEFRepository>();
+
+            // Servicios
+            services.AddScoped<LoginServices>();
 
             // MVC
             services.AddMvc(config =>
