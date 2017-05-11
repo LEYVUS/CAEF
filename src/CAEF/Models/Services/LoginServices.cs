@@ -16,18 +16,21 @@ namespace CAEF.Models.Services
         private ICAEFRepository _repositorioCAEF;
         private IFIADRepository _repositorioFIAD;
         private IUABCRepository _repositorioUABC;
+        private IUsuarioRepository _repositorioUsuario;
         private SignInManager<UsuarioUABC> _signIn;
 
         public LoginServices(
             SignInManager<UsuarioUABC> signInManager,
             IFIADRepository repositorioFIAD,
             IUABCRepository repositorioUABC,
-            ICAEFRepository repositorioCAEF)
+            ICAEFRepository repositorioCAEF,
+            IUsuarioRepository repositorioUsuario)
         {
             _repositorioFIAD = repositorioFIAD;
             _repositorioUABC = repositorioUABC;
             _repositorioCAEF = repositorioCAEF;
             _signIn = signInManager;
+            _repositorioUsuario = repositorioUsuario;
         }
 
         public async Task<string> Login(LoginDTO login)
@@ -43,7 +46,7 @@ namespace CAEF.Models.Services
                 {
                     if (_repositorioFIAD.UsuarioExiste(login.Email))
                     {
-                        if (_repositorioCAEF.UsuarioDuplicado(login.Email))
+                        if (_repositorioUsuario.UsuarioDuplicado(login.Email))
                         {
                             //return Ok();
                             return null;

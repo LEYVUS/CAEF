@@ -14,7 +14,7 @@
         $scope.usuarioAutenticado = {}
 
         $scope.obtenerUsuarios = function () {
-            $http.get("/CAEF/Usuarios")
+            $http.get("/Usuarios/Usuarios")
             .then(function (response) {
                 console.log(response.data);
                 $scope.usuarios = response.data;
@@ -47,7 +47,7 @@
                     if (usuario.rol.nombre != result.nombre) {
                         console.log(result);
                         usuario.rolId = result.id;
-                        $http.post("/CAEF/Editar", usuario)
+                        $http.post("/Usuarios/Editar", usuario)
                         .then(function (response) {
                             ModalService.showModal({
                                 templateUrl: "views/mensajeGenerico.html",
@@ -91,7 +91,7 @@
                 modal.element.modal();
                 modal.close.then(function (result) {
                     if (result) {
-                        $http.post("/CAEF/Borrar", usuario)
+                        $http.post("/Usuarios/Borrar", usuario)
                             .then(function (response) {
                                 ModalService.showModal({
                                     templateUrl: "views/mensajeGenerico.html",
@@ -125,7 +125,7 @@
         }
 
         $scope.obtenerUsuarioAutenticado = function () {
-            $http.get("/CAEF/UsuarioActual")
+            $http.get("/Usuarios/UsuarioActual")
             .then(function (response) {
                 console.log(response.data);
                 $scope.usuarioAutenticado = response.data;
@@ -210,7 +210,7 @@
         console.log($scope.urlActual);
 
         $scope.obtenerUsuarioAutenticado = function () {
-            $http.get("/CAEF/UsuarioActual")
+            $http.get("/Usuarios/UsuarioActual")
             .then(function (response) {
                 $scope.usuarioAutenticado = response.data;
             });
@@ -259,7 +259,7 @@
         }
 
         $scope.obtenerUsuarioAutenticado = function () {
-            $http.get("/CAEF/UsuarioActual")
+            $http.get("/Usuarios/UsuarioActual")
             .then(function (response) {
                 $scope.usuarioAutenticado = response.data;
                 //$scope.acta.Usuario = $scope.usuarioAutenticado;
@@ -415,7 +415,7 @@
 
         $scope.agregar = function () {
             console.log($scope.usuario);
-            $http.post("/CAEF/Agregar", $scope.usuario)
+            $http.post("/Usuarios/Agregar", $scope.usuario)
             .then(function (response) {
                 console.log("Success");
                 console.log(response);
