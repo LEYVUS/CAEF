@@ -1,7 +1,4 @@
-﻿@model CAEF.ViewModels.UsuarioDTO
-@{
-    ViewBag.Title = "Sistema de Control de Actas de Evalucaci&oacute;n Final";
-    ViewBag.PageName = "Agregar Usuario";
+﻿@{
     Layout = "_Layout";
 }
 <div class="tab-content col-md-10">
@@ -14,7 +11,6 @@
                 <div class="form-group">
                     <label for="numeroEmpleado" class="col-md-3 control-label">N&uacute;mero de empleado:</label>
                     <div class="col-md-7">
-                        <span asp-validation-for="Id"></span>
                         <input type="number" ng-model="usuario.Id" class="form-control" id="numeroEmpleado" name="matricula" placeholder="Número" required>
                         <div ng-show="form.$submitted || form.matricula.$touched">
                             <span ng-show="form.matricula.$error.required">Se requiere una matrícula.</span>
@@ -25,7 +21,6 @@
                 <div class="form-group">
                     <label for="correoEmpleado" class="col-md-3 control-label">Correo:</label>
                     <div class="col-md-7">
-                        <span asp-validation-for="Correo"></span>
                         <input type="email" name="email" ng-model="usuario.Correo" class="form-control" id="correoEmpleado" placeholder="Correo electrónico" required>
                         <div ng-show="form.$submitted || form.email.$touched">
                             <span ng-show="form.email.$error.required">Se necesita un correo.</span>

@@ -92,6 +92,7 @@ namespace CAEF
             {
                 config.CreateMap<UsuarioDTO, Usuario>().ReverseMap();
                 config.CreateMap<ActaDocenteDTO, SolicitudDocente>().ReverseMap();
+                config.CreateMap<ActaAdminDTO, SolicitudAdmin>().ReverseMap();
                 config.CreateMap<AlumnoDTO, Alumno>().ReverseMap();
                 config.CreateMap<SolicitudAlumnoDTO, SolicitudAlumno>().ReverseMap();
             });

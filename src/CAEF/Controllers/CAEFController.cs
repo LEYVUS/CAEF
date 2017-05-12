@@ -43,7 +43,7 @@ namespace CAEF.Controllers
         }
 
         [Authorize]
-        [HttpGet("Acta")]
+        [HttpGet("SolicitarActa")]
         public IActionResult SolicitarActaAdmin()
         {
             var usuarioActual = _repositorioCAEF.UsuarioAutenticado(User.Identity.Name);
@@ -56,6 +56,38 @@ namespace CAEF.Controllers
             {
                 return View("SolicitarActaDocente");
             }
+        }
+
+        [Authorize]
+        [HttpGet("SolicitarActa/{id?}")]
+        public IActionResult SolicitarActaGenerada(int id)
+        {
+            var usuarioActual = _repositorioCAEF.UsuarioAutenticado(User.Identity.Name);
+            SolicitudDocente solicitud = _repositorioCAEF.ObtenerSolicitudDocente(id);
+
+            if (solicitud == null)
+                return Redirect("/");
+            else if (usuarioActual.RolId == 1)
+                return View();
+            else
+                return Redirect("/");
+
+        }
+
+        [Authorize]
+        [HttpGet("CAEF/Acta/{id?}")]
+        public IActionResult VerActa(int id)
+        {
+            var usuarioActual = _repositorioCAEF.UsuarioAutenticado(User.Identity.Name);
+            SolicitudDocente solicitud = _repositorioCAEF.ObtenerSolicitudDocente(id);
+
+            if (solicitud == null)
+                return Redirect("/");
+            else if (usuarioActual.RolId == 1)
+                return Ok(solicitud);
+            else
+                return Redirect("/");
+
         }
 
         [Authorize]
@@ -136,7 +168,7 @@ namespace CAEF.Controllers
         public IActionResult AgregarUsuario()
         {
             var usuarioActual = _repositorioCAEF.UsuarioAutenticado(User.Identity.Name);
-            if(usuarioActual.RolId == 1)
+            if (usuarioActual.RolId == 1)
             {
                 return View();
             }
@@ -188,10 +220,26 @@ namespace CAEF.Controllers
         }
 
         [Authorize]
+        [HttpPost("CAEF/AgregarActaAdmin")]
+        public async Task<IActionResult> AgregarActaAdmin([FromBody] ActaAdminDTO acta)
+        {
+            _repositorioCAEF.AgregarActaAdmin(Mapper.Map<SolicitudAdmin>(acta));
+
+            if (await _repositorioCAEF.GuardarCambios())
+            {
+                return Ok("Se agregó la solicitud suxessful");
+            }
+            else
+            {
+                return BadRequest("Ocurrió un error al agregar solicitud.");
+            }
+        }
+
+        [Authorize]
         [HttpPost("CAEF/AgregarSolicitudAlumno")]
         public async Task<IActionResult> AgregarSolicitudAlumno([FromBody] IEnumerable<SolicitudAlumnoDTO> solicitud)
         {
-            if(solicitud != null)
+            if (solicitud != null)
             {
                 _repositorioCAEF.AgregarSolicitudAlumno(Mapper.Map<IEnumerable<SolicitudAlumno>>(solicitud));
 

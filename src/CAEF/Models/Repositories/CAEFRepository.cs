@@ -164,5 +164,14 @@ namespace CAEF.Models.Repositories
 
             return resultado == null ? false : true;
         }
+
+        public SolicitudDocente ObtenerSolicitudDocente(int id)
+        {
+            SolicitudDocente solicitud = _contextoCAEF.SolicitudesDocente
+                .Where(s => s.Id == id)
+                .FirstOrDefault();
+
+            return solicitud;
+        }
     }
 }

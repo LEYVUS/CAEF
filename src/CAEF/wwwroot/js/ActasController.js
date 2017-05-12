@@ -3,7 +3,10 @@
     $scope.usuarioAutenticado = {}
     // Acta que se va a grabar
     $scope.acta = {
-        Periodo: new Date().getMonth() < 5 ? new Date().getFullYear() + '-1' : new Date().getFullYear() + '-2'
+        Periodo: new Date().getMonth() < 5 ? new Date().getFullYear() + '-1' : new Date().getFullYear() + '-2',
+        CicloEscolar: new Date().getMonth() < 5 ? new Date().getFullYear() + '-1' : new Date().getFullYear() + '-2',
+        ClaveUnidad: 290,
+        UnidadAcademica: "Fac. de Ingeniería, Arq. y Diseño"
     }
     // Carreras de la facultad
     $scope.carreras = []
@@ -108,7 +111,111 @@
             return false;
     }
 
-    $scope.grabar = function () {
+    $scope.grabarActaAdmin = function () {
+        $scope.acta.FechaAceptacion = new Date();
+        $scope.acta.NumeroAlumnos = $scope.solicitudesAlumno.length;
+        $scope.acta.CalificacionLetra = "CIEN";
+        $scope.acta.IdEstado = 1;
+        $scope.acta.FechaCreacion = new Date();
+        $scope.acta.Comentario = $scope.acta.Motivo;
+
+        angular.forEach($scope.solicitudesAlumno, function (value, key) {
+            $scope.solicitudesAlumno[key].Alumno.Grupo = $scope.grupo;
+        });
+
+        console.log($scope.acta);
+        console.log($scope.solicitudesAlumno);
+
+        $http.post("/CAEF/AgregarActaDocente", $scope.acta)
+       .then(function (response) {
+           console.log("Success");
+           console.log(response);
+
+           angular.forEach($scope.solicitudesAlumno, function (value, key) {
+               $scope.solicitudesAlumno[key].IdSolicitud = response.data;
+           });
+
+           $scope.acta.IdSolicitud = response.data;
+           $scope.acta.URLDocumento = "~/Acta/" + response.data;
+
+           $http.post("/CAEF/AgregarActaAdmin", $scope.acta)
+       .then(function (response) {
+           console.log("Success");
+           console.log(response);
+
+           $http.post("/CAEF/AgregarSolicitudAlumno", $scope.solicitudesAlumno)
+       .then(function (response) {
+           console.log("Success");
+           console.log(response);
+
+
+           ModalService.showModal({
+               templateUrl: "views/mensajeGenerico.html",
+               controller: "MensajeController",
+               inputs: {
+                   mensaje: response.data
+               }
+           }).then(function (modal) {
+               modal.element.modal();
+               modal.close.then(function () {
+                   $window.location = "/Acta";
+               });
+           });
+
+
+
+
+       }, function (error) {
+           console.log(error);
+           ModalService.showModal({
+               templateUrl: "views/mensajeGenerico.html",
+               controller: "MensajeController",
+               inputs: {
+                   mensaje: error.data
+               }
+           }).then(function (modal) {
+               modal.element.modal();
+               modal.close.then(function () {
+                   //$window.location = "/AgregarUsuario";
+               });
+           });
+       });
+
+       }, function (error) {
+           console.log(error);
+           ModalService.showModal({
+               templateUrl: "views/mensajeGenerico.html",
+               controller: "MensajeController",
+               inputs: {
+                   mensaje: error.data
+               }
+           }).then(function (modal) {
+               modal.element.modal();
+               modal.close.then(function () {
+                   //$window.location = "/AgregarUsuario";
+               });
+           });
+       });
+
+       }, function (error) {
+           console.log(error);
+           ModalService.showModal({
+               templateUrl: "views/mensajeGenerico.html",
+               controller: "MensajeController",
+               inputs: {
+                   mensaje: error.data
+               }
+           }).then(function (modal) {
+               modal.element.modal();
+               modal.close.then(function () {
+                   //$window.location = "/AgregarUsuario";
+               });
+           });
+       });
+
+    }
+
+    $scope.grabarActaDocente = function () {
         $scope.acta.IdEstado = 1;
         $scope.acta.FechaCreacion = new Date();
 

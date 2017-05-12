@@ -15,6 +15,7 @@ namespace CAEF.Models.Repositories
         void AgregarUsuario(Usuario usuario);
         int AgregarActaDocente(SolicitudDocente acta);
         void AgregarActaAdmin(SolicitudAdmin acta);
+        SolicitudDocente ObtenerSolicitudDocente(int id);
         void AgregarSolicitudAlumno(IEnumerable<SolicitudAlumno> solicitudes);
         void EditarUsuario(Usuario usuario);
         void BorrarUsuario(Usuario usuario);
