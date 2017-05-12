@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
-using CAEF.Models.Contexts;
 using CAEF.Models.DTO;
 using CAEF.Models.Entities.CAEF;
 using CAEF.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using CAEF.Services;
 
 
 namespace CAEF.Controllers
@@ -17,20 +14,20 @@ namespace CAEF.Controllers
     public class UsuarioController : Controller
     {        
         private IFIADRepository _repositorioFIAD;
-        private IUsuarioRepository _repositorioUsuario;        
+        private UsuarioServices _servicioUsuario;        
 
-        public UsuarioController(IFIADRepository repositorioFIAD, IUsuarioRepository repositorioUsuario)
+        public UsuarioController(IFIADRepository repositorioFIAD, UsuarioServices repositorioUsuario)
         {            
             _repositorioFIAD = repositorioFIAD;
-            _repositorioUsuario = repositorioUsuario;
+            _servicioUsuario = repositorioUsuario;
         }
 
         [Authorize]
         [HttpGet("Usuarios")]
         public IActionResult ListarUsuarios()
         {
-            var usuarioActual = _repositorioUsuario.UsuarioAutenticado(User.Identity.Name);
-            var usuarios = _repositorioUsuario.ObtenerUsuarios();
+            var usuarioActual = _servicioUsuario.UsuarioAutenticado(User.Identity.Name);
+            var usuarios = _servicioUsuario.ObtenerUsuarios();
             var usuariosDTO = Mapper.Map<IEnumerable<UsuarioDTO>>(usuarios);
 
             if (usuarioActual.RolId == 1)
@@ -47,7 +44,7 @@ namespace CAEF.Controllers
         [HttpGet("Usuarios/Usuarios")]
         public IActionResult VerUsuarios()
         {
-            var usuarios = _repositorioUsuario.ObtenerUsuarios();
+            var usuarios = _servicioUsuario.ObtenerUsuarios();
             var usuariosDTO = Mapper.Map<IEnumerable<UsuarioDTO>>(usuarios);
             return Ok(usuariosDTO);
         }
@@ -56,8 +53,8 @@ namespace CAEF.Controllers
         [HttpPost("Usuarios/Editar")]
         public async Task<IActionResult> EditarUsuarios([FromBody] UsuarioDTO usuario)
         {
-            _repositorioUsuario.EditarUsuario(Mapper.Map<Usuario>(usuario));
-            if (await _repositorioUsuario.GuardarCambios())
+            _servicioUsuario.EditarUsuario(Mapper.Map<Usuario>(usuario));
+            if (await _servicioUsuario.GuardarCambios())
             {
                 return Ok("El usuario fue modificado exitosamente");
             }
@@ -68,8 +65,8 @@ namespace CAEF.Controllers
         [HttpPost("Usuarios/Borrar")]
         public async Task<IActionResult> BorrarUsuarios([FromBody] UsuarioDTO usuario)
         {
-            _repositorioUsuario.BorrarUsuario(Mapper.Map<Usuario>(usuario));
-            if (await _repositorioUsuario.GuardarCambios())
+            _servicioUsuario.BorrarUsuario(Mapper.Map<Usuario>(usuario));
+            if (await _servicioUsuario.GuardarCambios())
             {
                 return Ok("Se ha eliminado el usuario.");
             }
@@ -80,7 +77,7 @@ namespace CAEF.Controllers
         [HttpGet("AgregarUsuario")]
         public IActionResult AgregarUsuario()
         {
-            var usuarioActual = _repositorioUsuario.UsuarioAutenticado(User.Identity.Name);
+            var usuarioActual = _servicioUsuario.UsuarioAutenticado(User.Identity.Name);
             if (usuarioActual.RolId == 1)
             {
                 return View();
@@ -95,17 +92,17 @@ namespace CAEF.Controllers
         [HttpPost("Usuarios/Agregar")]
         public async Task<IActionResult> AgregarUsuario([FromBody] UsuarioDTO usuario)
         {
-            var usuarioDuplicado = _repositorioUsuario.UsuarioDuplicado(usuario.Correo);
+            var usuarioDuplicado = _servicioUsuario.UsuarioDuplicado(usuario.Correo);
             var usuarioExisteFIAD = _repositorioFIAD.UsuarioExiste(usuario.Correo);
-            var usuarioExisteUABC = _repositorioUsuario.UsuarioExiste(usuario.Correo);
+            var usuarioExisteUABC = _servicioUsuario.UsuarioExiste(usuario.Correo);
 
             if (!usuarioExisteUABC) return BadRequest("El usuario no es miembro de UABC.");
             if (!usuarioExisteFIAD) return BadRequest("El usuario no es miembro de FIAD.");
             if (usuarioDuplicado) return BadRequest("El usuario ya está registrado en el sistema.");
 
-            _repositorioUsuario.AgregarUsuario(Mapper.Map<Usuario>(usuario));
+            _servicioUsuario.AgregarUsuario(Mapper.Map<Usuario>(usuario));
 
-            if (await _repositorioUsuario.GuardarCambios())
+            if (await _servicioUsuario.GuardarCambios())
             {
                 return Ok("Se agregó el usuario correctamente.");
             }

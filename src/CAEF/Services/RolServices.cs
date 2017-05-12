@@ -7,13 +7,11 @@ namespace CAEF.Services
 {
     public class RolServices
     {
-        private CAEFContext _contextoCAEF;
-        private UsuarioUABCContext _contextoUABC;
+        private CAEFContext _contextoCAEF;        
 
-        public RolServices(CAEFContext contextoCAEF, UsuarioUABCContext contextoUABC)
+        public RolServices(CAEFContext contextoCAEF)
         {
             _contextoCAEF = contextoCAEF;
-            _contextoUABC = contextoUABC;
         }
 
         public IEnumerable<Rol> ObtenerRoles()

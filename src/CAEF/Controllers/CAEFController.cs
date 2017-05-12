@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CAEF.Services;
 
 namespace CAEF.Controllers
 {
@@ -17,20 +18,22 @@ namespace CAEF.Controllers
     {
         private ICAEFRepository _repositorioCAEF;
         private IFIADRepository _repositorioFIAD;
-        private IUsuarioRepository _repositorioUsuario;
+        private UsuarioServices _servicioUsuario;
+        private RolServices _serviocioRol;
 
-        public CAEFController(ICAEFRepository repositorioCAEF, IFIADRepository repositorioFIAD, IUsuarioRepository repositorioUsuario)
+        public CAEFController(ICAEFRepository repositorioCAEF, IFIADRepository repositorioFIAD, UsuarioServices repositorioUsuario, RolServices servicioRol)
         {
             _repositorioCAEF = repositorioCAEF;
             _repositorioFIAD = repositorioFIAD;
-            _repositorioUsuario = repositorioUsuario;
+            _servicioUsuario = repositorioUsuario;
+            _serviocioRol = servicioRol;
         }
 
         [Authorize]
         [HttpGet("Acta")]
         public IActionResult SolicitarActaAdmin()
         {
-            var usuarioActual = _repositorioUsuario.UsuarioAutenticado(User.Identity.Name);
+            var usuarioActual = _servicioUsuario.UsuarioAutenticado(User.Identity.Name);
 
             if (usuarioActual.RolId == 1)
             {
@@ -46,7 +49,7 @@ namespace CAEF.Controllers
         [HttpGet("CAEF/Roles")]
         public IActionResult VerRoles()
         {
-            var roles = _repositorioCAEF.ObtenerRoles();
+            var roles = _serviocioRol.ObtenerRoles();
             return Ok(roles);
         }
 
@@ -90,7 +93,7 @@ namespace CAEF.Controllers
 
             if (id != 0)
             {
-                await _repositorioUsuario.GuardarCambios();
+                await _servicioUsuario.GuardarCambios();
                 return Ok(id);
             }
             else
@@ -107,7 +110,7 @@ namespace CAEF.Controllers
             {
                 _repositorioCAEF.AgregarSolicitudAlumno(Mapper.Map<IEnumerable<SolicitudAlumno>>(solicitud));
 
-                if (await _repositorioUsuario.GuardarCambios())
+                if (await _servicioUsuario.GuardarCambios())
                 {
                     return Ok("Se agregó la solicitud correctamente.");
                 }

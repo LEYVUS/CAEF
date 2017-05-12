@@ -4,7 +4,6 @@ using CAEF.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 using CAEF.Services;
 
@@ -17,7 +16,7 @@ namespace CAEF.Controllers
         private IFIADRepository _repositorioFIAD;
         private IUABCRepository _repositorioUABC;
         private ICAEFRepository _repositorioCAEF;
-        private IUsuarioRepository _repositorioUsuario;
+        private UsuarioServices _servicioUsuario;
         private LoginServices _login;
 
         public LoginController(
@@ -25,7 +24,7 @@ namespace CAEF.Controllers
             IFIADRepository repositorioFIAD,
             IUABCRepository repositorioUABC,
             ICAEFRepository repositorioCAEF,
-            IUsuarioRepository repositorioUsuario,
+            UsuarioServices repositorioUsuario,
             LoginServices login)
         {
             _repositorioFIAD = repositorioFIAD;
@@ -33,7 +32,7 @@ namespace CAEF.Controllers
             _repositorioCAEF = repositorioCAEF;
             _signIn = signInManager;
             _login = login;
-            _repositorioUsuario = repositorioUsuario;
+            _servicioUsuario = repositorioUsuario;
         }
 
         [HttpGet("Login")]
@@ -78,7 +77,7 @@ namespace CAEF.Controllers
         [HttpGet("CAEF/UsuarioActual")]
         public IActionResult GetCurrentUser()
         {
-            var usuarioActual = _repositorioUsuario.UsuarioAutenticado(User.Identity.Name);
+            var usuarioActual = _servicioUsuario.UsuarioAutenticado(User.Identity.Name);
 
             return Ok(usuarioActual);
         }

@@ -69,6 +69,7 @@ namespace CAEF
             // Servicios
             services.AddScoped<LoginServices>();
             services.AddScoped<RolServices>();
+            services.AddScoped<UsuarioServices>();
 
             // MVC
             services.AddMvc(config =>

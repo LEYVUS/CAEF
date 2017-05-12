@@ -14,17 +14,13 @@ namespace CAEF.Repositories
     {
         private CAEFContext _contextoCAEF;
         private UsuarioUABCContext _contextoUABC;
-        private RolServices _rol;
+        private RolServices _servicioRol;
 
-        public CAEFRepository(CAEFContext contextoCAEF, UsuarioUABCContext contextoUABC)
+        public CAEFRepository(CAEFContext contextoCAEF, UsuarioUABCContext contextoUABC, RolServices servicioRol)
         {
             _contextoCAEF = contextoCAEF;
             _contextoUABC = contextoUABC;
-        }
-
-        public IEnumerable<Rol> ObtenerRoles()
-        {
-            return _rol.ObtenerRoles();
+            _servicioRol = servicioRol;
         }
 
         public IEnumerable<Carrera> ObtenerCarreras()
