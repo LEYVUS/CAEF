@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-namespace CAEF.Models.Repositories
+namespace CAEF.Repositories
 {
     public class UABCRepository : IUABCRepository
     {

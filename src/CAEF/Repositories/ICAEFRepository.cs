@@ -2,7 +2,7 @@
 using CAEF.Models.Entities.CAEF;
 using System.Threading.Tasks;
 
-namespace CAEF.Models.Repositories
+namespace CAEF.Repositories
 {
     public interface ICAEFRepository
     {        

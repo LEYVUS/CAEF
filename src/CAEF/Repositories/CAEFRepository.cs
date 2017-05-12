@@ -6,13 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CAEF.Services;
 
-namespace CAEF.Models.Repositories
+namespace CAEF.Repositories
 {
     public class CAEFRepository : ICAEFRepository
     {
         private CAEFContext _contextoCAEF;
         private UsuarioUABCContext _contextoUABC;
+        private RolServices _rol;
 
         public CAEFRepository(CAEFContext contextoCAEF, UsuarioUABCContext contextoUABC)
         {
@@ -20,14 +22,10 @@ namespace CAEF.Models.Repositories
             _contextoUABC = contextoUABC;
         }
 
-
         public IEnumerable<Rol> ObtenerRoles()
         {
-            return _contextoCAEF.Roles.ToList();
+            return _rol.ObtenerRoles();
         }
-
-
-
 
         public IEnumerable<Carrera> ObtenerCarreras()
         {

@@ -1,12 +1,12 @@
 ﻿using CAEF.Models.Entities.UABC;
-using CAEF.Models.Repositories;
+using CAEF.Repositories;
 using CAEF.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using CAEF.Models.Services;
+using CAEF.Services;
 
 namespace CAEF.Controllers
 {

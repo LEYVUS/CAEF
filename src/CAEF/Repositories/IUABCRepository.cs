@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using CAEF.Models.Entities.UABC;
 
-namespace CAEF.Models.Repositories
+namespace CAEF.Repositories
 {
     public interface IUABCRepository
     {

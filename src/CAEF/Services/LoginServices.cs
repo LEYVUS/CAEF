@@ -1,6 +1,6 @@
 ﻿using CAEF.Models.DTO;
 using CAEF.Models.Entities.UABC;
-using CAEF.Models.Repositories;
+using CAEF.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CAEF.Models.Services
+namespace CAEF.Services
 {
     public class LoginServices
     {

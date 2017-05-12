@@ -1,4 +1,4 @@
-﻿using CAEF.Models.Repositories;
+﻿using CAEF.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;

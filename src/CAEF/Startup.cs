@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using CAEF.Models.Contexts;
 using Microsoft.Extensions.Configuration;
 using CAEF.Models.Seed;
-using CAEF.Models.Repositories;
+using CAEF.Repositories;
 using AutoMapper;
 using CAEF.Models.DTO;
 using CAEF.Models.Entities.CAEF;
@@ -13,7 +13,7 @@ using CAEF.Models.Entities.UABC;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using Microsoft.AspNetCore.Mvc;
-using CAEF.Models.Services;
+using CAEF.Services;
 
 namespace CAEF
 {
@@ -68,6 +68,7 @@ namespace CAEF
 
             // Servicios
             services.AddScoped<LoginServices>();
+            services.AddScoped<RolServices>();
 
             // MVC
             services.AddMvc(config =>

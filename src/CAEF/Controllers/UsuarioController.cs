@@ -2,7 +2,7 @@
 using CAEF.Models.Contexts;
 using CAEF.Models.DTO;
 using CAEF.Models.Entities.CAEF;
-using CAEF.Models.Repositories;
+using CAEF.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;

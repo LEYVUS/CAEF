@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CAEF.Models.Repositories
+namespace CAEF.Repositories
 {
     public class FIADRepository : IFIADRepository
     {
