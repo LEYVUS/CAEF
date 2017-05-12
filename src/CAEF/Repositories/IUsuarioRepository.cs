@@ -6,13 +6,7 @@ namespace CAEF.Repositories
 {
     public interface IUsuarioRepository
     {
-        IEnumerable<Usuario> ObtenerUsuarios();
-        void AgregarUsuario(Usuario usuario);
-        void EditarUsuario(Usuario usuario);
-        void BorrarUsuario(Usuario usuario);
-        bool UsuarioExiste(string Correo);
-        Usuario UsuarioAutenticado(string Username);
-        bool UsuarioDuplicado(string Correo);
-        Task<bool> GuardarCambios();
+        bool ConsultarBaseDeDatosUABC(string correo);
+        bool ConsultarBaseDeDatosFIAD(string correo);
     }
 }

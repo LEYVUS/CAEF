@@ -64,7 +64,7 @@ namespace CAEF
             services.AddScoped<IUABCRepository, UABCRepository>();
             services.AddScoped<IFIADRepository, FIADRepository>();
             services.AddScoped<ICAEFRepository, CAEFRepository>();
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<UsuarioRepository>();
 
             // Servicios
             services.AddScoped<LoginServices>();

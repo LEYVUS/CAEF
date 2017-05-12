@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CAEF.Repositories;
 
 namespace CAEF.Services
 {
@@ -11,11 +12,12 @@ namespace CAEF.Services
     {
         private CAEFContext _contextoCAEF;
         private UsuarioUABCContext _contextoUABC;
-
-        public UsuarioServices(CAEFContext contextoCAEF, UsuarioUABCContext contextoUABC)
+        private CRUDRepository<Usuario> _repositorioUsuario;
+        public UsuarioServices(CAEFContext contextoCAEF, UsuarioUABCContext contextoUABC, UsuarioRepository repositorioUsuario)
         {
             _contextoCAEF = contextoCAEF;
             _contextoUABC = contextoUABC;
+            _repositorioUsuario = repositorioUsuario;
         }
 
         public IEnumerable<Usuario> ObtenerUsuarios()
@@ -37,8 +39,8 @@ namespace CAEF.Services
             usuario.Id = usuarioUABC.Matricula;
             usuario.Nombre = usuarioUABC.Nombre;
             usuario.ApellidoP = usuarioUABC.ApellidoP;
-            usuario.ApellidoM = usuarioUABC.ApellidoM;
-            _contextoCAEF.Add(usuario);
+            usuario.ApellidoM = usuarioUABC.ApellidoM;            
+            _repositorioUsuario.Agregar(usuario);
         }
         public void EditarUsuario(Usuario usuario)
         {

@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace CAEF.Models.Repositories
+namespace CAEF.Repositories
 {
-    public interface IRepositorioGenerico<Entidad> where Entidad : class
+    public interface ICRUDRepository<Entidad> where Entidad : class
     {
         void Agregar(Entidad entidad);
         void Borrar(Entidad entidad);
         void Modificar(Entidad entidad);
-        void BuscarID(int id);
+        Entidad BuscarID(int id);
         List<Entidad> BuscarTodos();
     }
 }
