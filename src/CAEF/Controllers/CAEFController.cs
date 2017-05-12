@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CAEF.Services;
+using CAEF.Repositories;
 
 namespace CAEF.Controllers
 {
@@ -18,15 +19,22 @@ namespace CAEF.Controllers
     {
         private ICAEFRepository _repositorioCAEF;
         private IFIADRepository _repositorioFIAD;
+        private CarreraRepository _repositorioCarrera;
+
         private UsuarioServices _servicioUsuario;
         private RolServices _serviocioRol;
+        private SolicitudAdministrativaServices _servicioSolicitud;        
 
-        public CAEFController(ICAEFRepository repositorioCAEF, IFIADRepository repositorioFIAD, UsuarioServices repositorioUsuario, RolServices servicioRol)
+        public CAEFController(ICAEFRepository repositorioCAEF, IFIADRepository repositorioFIAD,
+            UsuarioServices repositorioUsuario, RolServices servicioRol,
+            SolicitudAdministrativaServices servicioSolicitud, CarreraRepository repositorioCarrera)
         {
             _repositorioCAEF = repositorioCAEF;
             _repositorioFIAD = repositorioFIAD;
             _servicioUsuario = repositorioUsuario;
             _serviocioRol = servicioRol;
+            _servicioSolicitud = servicioSolicitud;
+            _repositorioCarrera = repositorioCarrera;
         }
 
         [Authorize]
@@ -57,7 +65,7 @@ namespace CAEF.Controllers
         [HttpGet("CAEF/Carreras")]
         public IActionResult VerCarreras()
         {
-            var carreras = _repositorioCAEF.ObtenerCarreras();
+            var carreras = _repositorioCarrera.BuscarTodos();
             return Ok(carreras);
         }
 
@@ -73,7 +81,7 @@ namespace CAEF.Controllers
         [HttpGet("CAEF/Subtipos")]
         public IActionResult VerSubtipos()
         {
-            var subtipos = _repositorioCAEF.ObtenerSubtiposExamen();
+            var subtipos = _servicioSolicitud.ObtenerSubtiposExamen();
             return Ok(subtipos);
         }
 
@@ -81,7 +89,7 @@ namespace CAEF.Controllers
         [HttpGet("CAEF/Tipos")]
         public IActionResult VerTipos()
         {
-            var tipos = _repositorioCAEF.ObtenerTiposExamen();
+            var tipos = _servicioSolicitud.ObtenerTiposExamen();
             return Ok(tipos);
         }
 
@@ -89,7 +97,7 @@ namespace CAEF.Controllers
         [HttpPost("CAEF/AgregarActaDocente")]
         public async Task<IActionResult> AgregarActaDocente([FromBody] ActaDocenteDTO acta)
         {
-            var id = _repositorioCAEF.AgregarActaDocente(Mapper.Map<SolicitudDocente>(acta));
+            var id = _servicioSolicitud.AgregarActaDocente(Mapper.Map<SolicitudDocente>(acta));
 
             if (id != 0)
             {
@@ -108,7 +116,7 @@ namespace CAEF.Controllers
         {
             if(solicitud != null)
             {
-                _repositorioCAEF.AgregarSolicitudAlumno(Mapper.Map<IEnumerable<SolicitudAlumno>>(solicitud));
+                _servicioSolicitud.AgregarSolicitudAlumno(Mapper.Map<IEnumerable<SolicitudAlumno>>(solicitud));
 
                 if (await _servicioUsuario.GuardarCambios())
                 {

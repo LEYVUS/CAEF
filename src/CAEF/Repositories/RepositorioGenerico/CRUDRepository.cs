@@ -34,10 +34,7 @@ namespace CAEF.Repositories
             return _contextoCAEF.Find<Entidad>(id);            
         }
 
-        public List<Entidad> BuscarTodos()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract List<Entidad> BuscarTodos();
 
         public void Modificar(Entidad entidad)
         {

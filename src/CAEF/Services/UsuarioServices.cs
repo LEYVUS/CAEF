@@ -22,9 +22,10 @@ namespace CAEF.Services
 
         public IEnumerable<Usuario> ObtenerUsuarios()
         {
-            return _contextoCAEF.Usuarios
+            return _repositorioUsuario.BuscarTodos();
+            /*return _contextoCAEF.Usuarios
                 .Include(u => u.Rol)
-                .ToList();
+                .ToList();*/
         }
         public void AgregarUsuario(Usuario usuario)
         {

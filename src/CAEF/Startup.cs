@@ -65,11 +65,13 @@ namespace CAEF
             services.AddScoped<IFIADRepository, FIADRepository>();
             services.AddScoped<ICAEFRepository, CAEFRepository>();
             services.AddScoped<UsuarioRepository>();
+            services.AddScoped<CarreraRepository>();
 
             // Servicios
             services.AddScoped<LoginServices>();
             services.AddScoped<RolServices>();
             services.AddScoped<UsuarioServices>();
+            services.AddScoped<SolicitudAdministrativaServices>();
 
             // MVC
             services.AddMvc(config =>
