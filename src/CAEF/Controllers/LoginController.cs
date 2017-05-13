@@ -14,22 +14,19 @@ namespace CAEF.Controllers
     {
         private SignInManager<UsuarioUABC> _signIn;
         private IFIADRepository _repositorioFIAD;
-        private IUABCRepository _repositorioUABC;
-        private ICAEFRepository _repositorioCAEF;
+        private IUABCRepository _repositorioUABC;        
         private UsuarioServices _servicioUsuario;
         private LoginServices _login;
 
         public LoginController(
             SignInManager<UsuarioUABC> signInManager,
             IFIADRepository repositorioFIAD,
-            IUABCRepository repositorioUABC,
-            ICAEFRepository repositorioCAEF,
+            IUABCRepository repositorioUABC,            
             UsuarioServices repositorioUsuario,
             LoginServices login)
         {
             _repositorioFIAD = repositorioFIAD;
-            _repositorioUABC = repositorioUABC;
-            _repositorioCAEF = repositorioCAEF;
+            _repositorioUABC = repositorioUABC;            
             _signIn = signInManager;
             _login = login;
             _servicioUsuario = repositorioUsuario;

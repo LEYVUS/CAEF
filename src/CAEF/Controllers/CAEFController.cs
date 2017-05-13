@@ -16,25 +16,26 @@ using CAEF.Repositories;
 namespace CAEF.Controllers
 {
     public class CAEFController : Controller
-    {
-        private ICAEFRepository _repositorioCAEF;
+    {        
         private IFIADRepository _repositorioFIAD;
         private CarreraRepository _repositorioCarrera;
+        private MateriaRepository _repositorioMateria;
 
         private UsuarioServices _servicioUsuario;
         private RolServices _serviocioRol;
         private SolicitudAdministrativaServices _servicioSolicitud;        
 
-        public CAEFController(ICAEFRepository repositorioCAEF, IFIADRepository repositorioFIAD,
+        public CAEFController(IFIADRepository repositorioFIAD,
             UsuarioServices repositorioUsuario, RolServices servicioRol,
-            SolicitudAdministrativaServices servicioSolicitud, CarreraRepository repositorioCarrera)
-        {
-            _repositorioCAEF = repositorioCAEF;
+            SolicitudAdministrativaServices servicioSolicitud, CarreraRepository repositorioCarrera,
+            MateriaRepository repositorioMateria)
+        {            
             _repositorioFIAD = repositorioFIAD;
             _servicioUsuario = repositorioUsuario;
             _serviocioRol = servicioRol;
             _servicioSolicitud = servicioSolicitud;
             _repositorioCarrera = repositorioCarrera;
+            _repositorioMateria = repositorioMateria;
         }
 
         [Authorize]
@@ -73,7 +74,7 @@ namespace CAEF.Controllers
         [HttpGet("CAEF/Materias")]
         public IActionResult VerMaterias()
         {
-            var materias = _repositorioCAEF.ObtenerMaterias();
+            var materias = _repositorioMateria.BuscarTodos();
             return Ok(materias);
         }
 

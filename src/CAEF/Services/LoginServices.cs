@@ -12,8 +12,7 @@ using System.Threading.Tasks;
 namespace CAEF.Services
 {
     public class LoginServices
-    {
-        private ICAEFRepository _repositorioCAEF;
+    {        
         private IFIADRepository _repositorioFIAD;
         private IUABCRepository _repositorioUABC;
         private UsuarioServices _servicioUsuario;
@@ -22,13 +21,11 @@ namespace CAEF.Services
         public LoginServices(
             SignInManager<UsuarioUABC> signInManager,
             IFIADRepository repositorioFIAD,
-            IUABCRepository repositorioUABC,
-            ICAEFRepository repositorioCAEF,
+            IUABCRepository repositorioUABC,            
             UsuarioServices repositorioUsuario)
         {
             _repositorioFIAD = repositorioFIAD;
-            _repositorioUABC = repositorioUABC;
-            _repositorioCAEF = repositorioCAEF;
+            _repositorioUABC = repositorioUABC;            
             _signIn = signInManager;
             _servicioUsuario = repositorioUsuario;
         }
